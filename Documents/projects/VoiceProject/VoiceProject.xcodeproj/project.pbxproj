@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC7D2DD715E74C35008A7257 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7D2DD615E74C35008A7257 /* UIKit.framework */; };
+		EC7D2DD915E74C35008A7257 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7D2DD815E74C35008A7257 /* Foundation.framework */; };
+		EC7D2DDB15E74C35008A7257 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7D2DDA15E74C35008A7257 /* CoreGraphics.framework */; };
+		EC7D2DE115E74C35008A7257 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC7D2DDF15E74C35008A7257 /* InfoPlist.strings */; };
+		EC7D2DE315E74C35008A7257 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2DE215E74C35008A7257 /* main.m */; };
+		EC7D2DE715E74C35008A7257 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2DE615E74C35008A7257 /* AppDelegate.m */; };
+		EC7D2DEA15E74C35008A7257 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7D2DE815E74C35008A7257 /* MainStoryboard.storyboard */; };
+		EC7D2DED15E74C35008A7257 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2DEC15E74C35008A7257 /* MainViewController.m */; };
+		EC7D2DF515E74C35008A7257 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7D2DF415E74C35008A7257 /* SenTestingKit.framework */; };
+		EC7D2DF615E74C35008A7257 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7D2DD615E74C35008A7257 /* UIKit.framework */; };
+		EC7D2DF715E74C35008A7257 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7D2DD815E74C35008A7257 /* Foundation.framework */; };
+		EC7D2DFF15E74C35008A7257 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC7D2DFD15E74C35008A7257 /* InfoPlist.strings */; };
+		EC7D2E0215E74C35008A7257 /* VoiceProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E0115E74C35008A7257 /* VoiceProjectTests.m */; };
+		EC7D2E0D15E7634A008A7257 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E0C15E7634A008A7257 /* GroupViewController.m */; };
+		EC7D2E1015E7674F008A7257 /* TrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E0F15E7674E008A7257 /* TrackViewController.m */; };
+		EC7D2E1315E78AFC008A7257 /* XTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E1215E78AFC008A7257 /* XTableController.m */; };
+		EC87DBF215ECB83100121F85 /* ManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = EC87DBF115ECB83100121F85 /* ManagerSingleton.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC7D2DF815E74C35008A7257 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC7D2DC915E74C35008A7257 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC7D2DD115E74C35008A7257;
+			remoteInfo = VoiceProject;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EC7D2DD215E74C35008A7257 /* VoiceProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC7D2DD615E74C35008A7257 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EC7D2DD815E74C35008A7257 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EC7D2DDA15E74C35008A7257 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EC7D2DDE15E74C35008A7257 /* VoiceProject-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VoiceProject-Info.plist"; sourceTree = "<group>"; };
+		EC7D2DE015E74C35008A7257 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EC7D2DE215E74C35008A7257 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EC7D2DE415E74C35008A7257 /* VoiceProject-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VoiceProject-Prefix.pch"; sourceTree = "<group>"; };
+		EC7D2DE515E74C35008A7257 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EC7D2DE615E74C35008A7257 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EC7D2DE915E74C35008A7257 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		EC7D2DEB15E74C35008A7257 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		EC7D2DEC15E74C35008A7257 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		EC7D2DF315E74C35008A7257 /* VoiceProjectTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoiceProjectTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC7D2DF415E74C35008A7257 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		EC7D2DFC15E74C35008A7257 /* VoiceProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VoiceProjectTests-Info.plist"; sourceTree = "<group>"; };
+		EC7D2DFE15E74C35008A7257 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EC7D2E0015E74C35008A7257 /* VoiceProjectTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceProjectTests.h; sourceTree = "<group>"; };
+		EC7D2E0115E74C35008A7257 /* VoiceProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceProjectTests.m; sourceTree = "<group>"; };
+		EC7D2E0B15E7634A008A7257 /* GroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupViewController.h; path = ../GroupViewController.h; sourceTree = "<group>"; };
+		EC7D2E0C15E7634A008A7257 /* GroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupViewController.m; path = ../GroupViewController.m; sourceTree = "<group>"; };
+		EC7D2E0E15E7674E008A7257 /* TrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackViewController.h; path = ../TrackViewController.h; sourceTree = "<group>"; };
+		EC7D2E0F15E7674E008A7257 /* TrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackViewController.m; path = ../TrackViewController.m; sourceTree = "<group>"; };
+		EC7D2E1115E78AFC008A7257 /* XTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XTableController.h; path = ../XTableController.h; sourceTree = "<group>"; };
+		EC7D2E1215E78AFC008A7257 /* XTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XTableController.m; path = ../XTableController.m; sourceTree = "<group>"; };
+		EC87DBF015ECB83100121F85 /* ManagerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManagerSingleton.h; path = ../ManagerSingleton.h; sourceTree = "<group>"; };
+		EC87DBF115ECB83100121F85 /* ManagerSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManagerSingleton.m; path = ../ManagerSingleton.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC7D2DCF15E74C35008A7257 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7D2DD715E74C35008A7257 /* UIKit.framework in Frameworks */,
+				EC7D2DD915E74C35008A7257 /* Foundation.framework in Frameworks */,
+				EC7D2DDB15E74C35008A7257 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC7D2DEF15E74C35008A7257 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7D2DF515E74C35008A7257 /* SenTestingKit.framework in Frameworks */,
+				EC7D2DF615E74C35008A7257 /* UIKit.framework in Frameworks */,
+				EC7D2DF715E74C35008A7257 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC7D2DC715E74C35008A7257 = {
+			isa = PBXGroup;
+			children = (
+				EC7D2DDC15E74C35008A7257 /* VoiceProject */,
+				EC7D2DFA15E74C35008A7257 /* VoiceProjectTests */,
+				EC7D2DD515E74C35008A7257 /* Frameworks */,
+				EC7D2DD315E74C35008A7257 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC7D2DD315E74C35008A7257 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC7D2DD215E74C35008A7257 /* VoiceProject.app */,
+				EC7D2DF315E74C35008A7257 /* VoiceProjectTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC7D2DD515E74C35008A7257 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC7D2DD615E74C35008A7257 /* UIKit.framework */,
+				EC7D2DD815E74C35008A7257 /* Foundation.framework */,
+				EC7D2DDA15E74C35008A7257 /* CoreGraphics.framework */,
+				EC7D2DF415E74C35008A7257 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC7D2DDC15E74C35008A7257 /* VoiceProject */ = {
+			isa = PBXGroup;
+			children = (
+				EC7D2E0E15E7674E008A7257 /* TrackViewController.h */,
+				EC7D2E0F15E7674E008A7257 /* TrackViewController.m */,
+				EC7D2DE515E74C35008A7257 /* AppDelegate.h */,
+				EC7D2E1115E78AFC008A7257 /* XTableController.h */,
+				EC7D2E1215E78AFC008A7257 /* XTableController.m */,
+				EC7D2E0B15E7634A008A7257 /* GroupViewController.h */,
+				EC7D2E0C15E7634A008A7257 /* GroupViewController.m */,
+				EC7D2DE615E74C35008A7257 /* AppDelegate.m */,
+				EC7D2DE815E74C35008A7257 /* MainStoryboard.storyboard */,
+				EC7D2DEB15E74C35008A7257 /* MainViewController.h */,
+				EC7D2DEC15E74C35008A7257 /* MainViewController.m */,
+				EC87DBF015ECB83100121F85 /* ManagerSingleton.h */,
+				EC87DBF115ECB83100121F85 /* ManagerSingleton.m */,
+				EC7D2DDD15E74C35008A7257 /* Supporting Files */,
+			);
+			path = VoiceProject;
+			sourceTree = "<group>";
+		};
+		EC7D2DDD15E74C35008A7257 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC7D2DDE15E74C35008A7257 /* VoiceProject-Info.plist */,
+				EC7D2DDF15E74C35008A7257 /* InfoPlist.strings */,
+				EC7D2DE215E74C35008A7257 /* main.m */,
+				EC7D2DE415E74C35008A7257 /* VoiceProject-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC7D2DFA15E74C35008A7257 /* VoiceProjectTests */ = {
+			isa = PBXGroup;
+			children = (
+				EC7D2E0015E74C35008A7257 /* VoiceProjectTests.h */,
+				EC7D2E0115E74C35008A7257 /* VoiceProjectTests.m */,
+				EC7D2DFB15E74C35008A7257 /* Supporting Files */,
+			);
+			path = VoiceProjectTests;
+			sourceTree = "<group>";
+		};
+		EC7D2DFB15E74C35008A7257 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC7D2DFC15E74C35008A7257 /* VoiceProjectTests-Info.plist */,
+				EC7D2DFD15E74C35008A7257 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC7D2DD115E74C35008A7257 /* VoiceProject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC7D2E0515E74C35008A7257 /* Build configuration list for PBXNativeTarget "VoiceProject" */;
+			buildPhases = (
+				EC7D2DCE15E74C35008A7257 /* Sources */,
+				EC7D2DCF15E74C35008A7257 /* Frameworks */,
+				EC7D2DD015E74C35008A7257 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VoiceProject;
+			productName = VoiceProject;
+			productReference = EC7D2DD215E74C35008A7257 /* VoiceProject.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EC7D2DF215E74C35008A7257 /* VoiceProjectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC7D2E0815E74C35008A7257 /* Build configuration list for PBXNativeTarget "VoiceProjectTests" */;
+			buildPhases = (
+				EC7D2DEE15E74C35008A7257 /* Sources */,
+				EC7D2DEF15E74C35008A7257 /* Frameworks */,
+				EC7D2DF015E74C35008A7257 /* Resources */,
+				EC7D2DF115E74C35008A7257 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC7D2DF915E74C35008A7257 /* PBXTargetDependency */,
+			);
+			name = VoiceProjectTests;
+			productName = VoiceProjectTests;
+			productReference = EC7D2DF315E74C35008A7257 /* VoiceProjectTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC7D2DC915E74C35008A7257 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = EC7D2DCC15E74C35008A7257 /* Build configuration list for PBXProject "VoiceProject" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EC7D2DC715E74C35008A7257;
+			productRefGroup = EC7D2DD315E74C35008A7257 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC7D2DD115E74C35008A7257 /* VoiceProject */,
+				EC7D2DF215E74C35008A7257 /* VoiceProjectTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC7D2DD015E74C35008A7257 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7D2DE115E74C35008A7257 /* InfoPlist.strings in Resources */,
+				EC7D2DEA15E74C35008A7257 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC7D2DF015E74C35008A7257 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7D2DFF15E74C35008A7257 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EC7D2DF115E74C35008A7257 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC7D2DCE15E74C35008A7257 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7D2DE315E74C35008A7257 /* main.m in Sources */,
+				EC7D2DE715E74C35008A7257 /* AppDelegate.m in Sources */,
+				EC7D2DED15E74C35008A7257 /* MainViewController.m in Sources */,
+				EC7D2E0D15E7634A008A7257 /* GroupViewController.m in Sources */,
+				EC7D2E1015E7674F008A7257 /* TrackViewController.m in Sources */,
+				EC7D2E1315E78AFC008A7257 /* XTableController.m in Sources */,
+				EC87DBF215ECB83100121F85 /* ManagerSingleton.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC7D2DEE15E74C35008A7257 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7D2E0215E74C35008A7257 /* VoiceProjectTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC7D2DF915E74C35008A7257 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC7D2DD115E74C35008A7257 /* VoiceProject */;
+			targetProxy = EC7D2DF815E74C35008A7257 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EC7D2DDF15E74C35008A7257 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC7D2DE015E74C35008A7257 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EC7D2DE815E74C35008A7257 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC7D2DE915E74C35008A7257 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		EC7D2DFD15E74C35008A7257 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC7D2DFE15E74C35008A7257 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC7D2E0315E74C35008A7257 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EC7D2E0415E74C35008A7257 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC7D2E0615E74C35008A7257 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VoiceProject/VoiceProject-Prefix.pch";
+				INFOPLIST_FILE = "VoiceProject/VoiceProject-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EC7D2E0715E74C35008A7257 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VoiceProject/VoiceProject-Prefix.pch";
+				INFOPLIST_FILE = "VoiceProject/VoiceProject-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		EC7D2E0915E74C35008A7257 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VoiceProject.app/VoiceProject";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VoiceProject/VoiceProject-Prefix.pch";
+				INFOPLIST_FILE = "VoiceProjectTests/VoiceProjectTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		EC7D2E0A15E74C35008A7257 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VoiceProject.app/VoiceProject";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VoiceProject/VoiceProject-Prefix.pch";
+				INFOPLIST_FILE = "VoiceProjectTests/VoiceProjectTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC7D2DCC15E74C35008A7257 /* Build configuration list for PBXProject "VoiceProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC7D2E0315E74C35008A7257 /* Debug */,
+				EC7D2E0415E74C35008A7257 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC7D2E0515E74C35008A7257 /* Build configuration list for PBXNativeTarget "VoiceProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC7D2E0615E74C35008A7257 /* Debug */,
+				EC7D2E0715E74C35008A7257 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC7D2E0815E74C35008A7257 /* Build configuration list for PBXNativeTarget "VoiceProjectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC7D2E0915E74C35008A7257 /* Debug */,
+				EC7D2E0A15E74C35008A7257 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC7D2DC915E74C35008A7257 /* Project object */;
+}
