@@ -13,11 +13,12 @@
 
 @property (retain, nonatomic) NSMutableArray *arrayOfGroups;
 @property (retain, nonatomic) NSMutableArray *arrayOfTracks;
-//extern NSArray *const keys;
 
 + (ManagerSingleton *)instance; 
 
 - (id)init;
+
+- (void)readFromFile:(NSString *)fileName ToArray:(NSMutableArray *)array;
 
 - (NSString *)documentPath:(NSString *)file_name;
 
@@ -26,6 +27,12 @@
 - (void)addtrack:(NSMutableString *)nameOfTrack AtGroup:(NSMutableString *)nameOfGroup;
 
 - (NSMutableString *)searchGroupWithName:(NSMutableString *)nameOfGroup;
+
+- (void)renameGroup:(NSMutableString *)oldNameOfGroup ToNewGroup:(NSMutableString *)newNameGroup;
+
+- (void)renameTrack:(NSMutableString *)oldNameOfTrack ToNewGroup:(NSMutableString *)newNameTrack;
+
+- (NSMutableArray *)getAllTracksOfTheGroup:(NSMutableArray *)nameOfGroup;
 
 - (void)deleteGroup:(NSMutableString *)nameOfGroup;
 

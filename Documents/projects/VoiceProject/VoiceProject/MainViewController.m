@@ -8,11 +8,14 @@
 
 #import "MainViewController.h"
 #import "XTableController.h"
+#import "ManagerSingleton.h"
 
 @interface MainViewController ()
    
 @property (retain, nonatomic) XTableController *xcontroller;
 @property (retain, nonatomic) IBOutlet UITableView *tableOfGroups;
+@property (retain, nonatomic) IBOutlet UIButton *selectGroup;
+
 
 
 @end
@@ -23,7 +26,7 @@
 
 @synthesize xcontroller;
 @synthesize tableOfGroups;
-@synthesize groups;
+@synthesize selectGroup;
 
 
 - (IBAction)voiceButton:(UIButton *)sender {
@@ -36,20 +39,17 @@
 - (IBAction)editButton:(UIBarButtonItem *)sender {
 }
 
-- (IBAction)groupButton:(UIButton *)sender {
-    //create new window of groups
-    
-}
 
 - (void)viewDidLoad
 {
-    self.groups = [[NSMutableArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil];
+    ManagerSingleton *manager = [ManagerSingleton instance];
     XTableController *controller = [[XTableController alloc]
-                                    initWithArray:self.groups];
+                                    initWithArray:manager.arrayOfGroups];
     self.xcontroller = controller;
     [controller release];
-    [tableOfGroups setDelegate: self.xcontroller];
-    [tableOfGroups setDataSource: self.xcontroller];
+    [self.selectGroup setTitle:<#(NSString *)#> forState:nil];
+    [self.tableOfGroups setDelegate: self.xcontroller];
+    [self.tableOfGroups setDataSource: self.xcontroller];
     [super viewDidLoad];
 }
 
@@ -57,6 +57,7 @@
 - (void)viewDidUnload
 {
     [self setTableOfGroups:nil];
+    [self setSelectGroup:nil];
     [super viewDidUnload];
 }
 
@@ -68,7 +69,7 @@
 - (void)dealloc {
     [xcontroller release];
     [tableOfGroups release];
-    [groups release];
+    [selectGroup release];
     [super dealloc];
 }
 @end

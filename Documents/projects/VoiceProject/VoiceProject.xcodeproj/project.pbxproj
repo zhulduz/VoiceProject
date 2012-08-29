@@ -24,6 +24,7 @@
 		EC7D2E1015E7674F008A7257 /* TrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E0F15E7674E008A7257 /* TrackViewController.m */; };
 		EC7D2E1315E78AFC008A7257 /* XTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E1215E78AFC008A7257 /* XTableController.m */; };
 		EC87DBF215ECB83100121F85 /* ManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = EC87DBF115ECB83100121F85 /* ManagerSingleton.m */; };
+		EC8B98B515EDEED3006C2294 /* XTableControllerForGroupClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8B98B415EDEED3006C2294 /* XTableControllerForGroupClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		EC7D2E1215E78AFC008A7257 /* XTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XTableController.m; path = ../XTableController.m; sourceTree = "<group>"; };
 		EC87DBF015ECB83100121F85 /* ManagerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManagerSingleton.h; path = ../ManagerSingleton.h; sourceTree = "<group>"; };
 		EC87DBF115ECB83100121F85 /* ManagerSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManagerSingleton.m; path = ../ManagerSingleton.m; sourceTree = "<group>"; };
+		EC8B98B315EDEED3006C2294 /* XTableControllerForGroupClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XTableControllerForGroupClass.h; path = ../XTableControllerForGroupClass.h; sourceTree = "<group>"; };
+		EC8B98B415EDEED3006C2294 /* XTableControllerForGroupClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XTableControllerForGroupClass.m; path = ../XTableControllerForGroupClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				EC7D2E0E15E7674E008A7257 /* TrackViewController.h */,
 				EC7D2E0F15E7674E008A7257 /* TrackViewController.m */,
 				EC7D2DE515E74C35008A7257 /* AppDelegate.h */,
+				EC8B98B315EDEED3006C2294 /* XTableControllerForGroupClass.h */,
+				EC8B98B415EDEED3006C2294 /* XTableControllerForGroupClass.m */,
 				EC7D2E1115E78AFC008A7257 /* XTableController.h */,
 				EC7D2E1215E78AFC008A7257 /* XTableController.m */,
 				EC7D2E0B15E7634A008A7257 /* GroupViewController.h */,
@@ -284,6 +289,7 @@
 				EC7D2E1015E7674F008A7257 /* TrackViewController.m in Sources */,
 				EC7D2E1315E78AFC008A7257 /* XTableController.m in Sources */,
 				EC87DBF215ECB83100121F85 /* ManagerSingleton.m in Sources */,
+				EC8B98B515EDEED3006C2294 /* XTableControllerForGroupClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

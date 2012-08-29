@@ -19,7 +19,7 @@
                                 <rect key="frame" x="103" y="53" width="115" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="GROUP">
+                                <state key="normal">
                                     <color key="titleColor" red="0.6391495519" green="0.28319668370000001" blue="0.89003057070000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -27,7 +27,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="groupButton:" destination="2" eventType="touchUpInside" id="ddO-QE-r8x"/>
                                     <segue destination="oKe-Vd-Bnb" kind="push" id="WI6-9F-B19"/>
                                 </connections>
                             </button>
@@ -67,6 +66,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="selectGroup" destination="8OR-UD-f5r" id="RJM-s2-LRg"/>
                         <outlet property="tableOfGroups" destination="5jf-1V-CwL" id="gXH-bs-oEy"/>
                     </connections>
                 </viewController>
@@ -124,6 +124,7 @@
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="selectGroup" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tableOfGroups" candidateClass="UITableView"/>
             </relationships>
         </class>

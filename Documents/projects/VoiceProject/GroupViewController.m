@@ -7,12 +7,12 @@
 //
 
 #import "GroupViewController.h"
-#import "MainViewController.h"
-#import "XTableController.h"
+#import "XTableControllerForGroupClass.h"
+#import "ManagerSingleton.h"
 
 @interface GroupViewController ()
 
-@property (retain, nonatomic) XTableController *xcontroller;
+@property (retain, nonatomic) XTableControllerForGroupClass *xcontroller;
 @property (retain, nonatomic) IBOutlet UITableView *tableOfGroups;
 
 @end
@@ -33,13 +33,14 @@
 
 - (void)viewDidLoad
 {
-    MainViewController *rootViewController = [[MainViewController alloc] init];
-    XTableController *controller = [[XTableController alloc]
-                                 initWithArray:rootViewController.groups];
+    ManagerSingleton *manager = [ManagerSingleton instance];
+    XTableControllerForGroupClass *controller = [[XTableControllerForGroupClass alloc]
+                                 initWithArray:manager.arrayOfGroups];
+ 
     self.xcontroller = controller;
     [controller release];
-    [tableOfGroups setDelegate: self.xcontroller];
-    [tableOfGroups setDataSource: self.xcontroller];
+    [self.tableOfGroups setDelegate: self.xcontroller];
+    [self.tableOfGroups setDataSource: self.xcontroller];
 }
 
 - (void)viewDidUnload
@@ -54,8 +55,6 @@
 }
 
 - (void)dealloc {
- //   [tableOfGroups release];
-//    [tableOfGroups release];
     [tableOfGroups release];
     [super dealloc];
 }

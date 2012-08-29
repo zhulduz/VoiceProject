@@ -1,21 +1,21 @@
 //
-//  XTableController.m
+//  XTableControllerForGroupClass.m
 //  VoiceProject
 //
-//  Created by trainee on 8/24/12.
+//  Created by trainee on 8/29/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "XTableController.h"
-#import "MainViewController.h"
+#import "XTableControllerForGroupClass.h"
 
-@interface XTableController ()
+
+@interface XTableControllerForGroupClass ()
 
 @property (retain, nonatomic) NSArray *arrayOfData;
 
 @end
 
-@implementation XTableController {
+@implementation XTableControllerForGroupClass {
     NSArray *arrayOfData_;
 }
 
@@ -23,7 +23,7 @@
 
 - (id)initWithArray:(NSMutableArray *)groups {
     if ((self = [super init])) {
-            self.arrayOfData = groups;
+        self.arrayOfData = groups;
     }
     return self;
 }
@@ -57,6 +57,9 @@
     return cell;
 }
 
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+//}
 
 -(void)dealloc {
     [arrayOfData_ release];
