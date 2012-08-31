@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GroupViewController.h"
 
-@interface MainViewController : UIViewController<RenameButton>
+@interface MainViewController : UIViewController<RenameButton, UITableViewDelegate>
  
 @end
 

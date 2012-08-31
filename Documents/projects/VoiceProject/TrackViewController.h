@@ -10,4 +10,6 @@
 
 @interface TrackViewController : UIViewController
 
+@property (retain, nonatomic) NSMutableArray *arrayOfTracks;
+
 @end

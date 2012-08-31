@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol RenameButton
+
+@protocol RenameButton<NSObject>
 
 - (void)setNewNameOnButton:(NSString *)name;
 

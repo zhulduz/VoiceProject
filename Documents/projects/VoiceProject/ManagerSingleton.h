@@ -32,7 +32,7 @@
 
 - (void)renameTrack:(NSMutableString *)oldNameOfTrack ToNewGroup:(NSMutableString *)newNameTrack;
 
-- (NSMutableArray *)getAllTracksOfTheGroup:(NSMutableArray *)nameOfGroup;
+- (NSMutableArray *)getAllTracksOfTheGroup:(NSMutableString *)nameOfGroup;
 
 - (void)deleteGroup:(NSMutableString *)nameOfGroup;
 

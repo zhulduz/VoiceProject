@@ -24,6 +24,7 @@
 		EC7D2E1015E7674F008A7257 /* TrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E0F15E7674E008A7257 /* TrackViewController.m */; };
 		EC7D2E1315E78AFC008A7257 /* XTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E1215E78AFC008A7257 /* XTableController.m */; };
 		EC87DBF215ECB83100121F85 /* ManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = EC87DBF115ECB83100121F85 /* ManagerSingleton.m */; };
+		EC929AD515F0AFA500A1E75B /* EditGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC929AD415F0AFA500A1E75B /* EditGroupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		EC7D2E1215E78AFC008A7257 /* XTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XTableController.m; path = ../XTableController.m; sourceTree = "<group>"; };
 		EC87DBF015ECB83100121F85 /* ManagerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManagerSingleton.h; path = ../ManagerSingleton.h; sourceTree = "<group>"; };
 		EC87DBF115ECB83100121F85 /* ManagerSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManagerSingleton.m; path = ../ManagerSingleton.m; sourceTree = "<group>"; };
+		EC929AD315F0AFA500A1E75B /* EditGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditGroupViewController.h; path = ../EditGroupViewController.h; sourceTree = "<group>"; };
+		EC929AD415F0AFA500A1E75B /* EditGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditGroupViewController.m; path = ../EditGroupViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,11 +126,13 @@
 		EC7D2DDC15E74C35008A7257 /* VoiceProject */ = {
 			isa = PBXGroup;
 			children = (
-				EC7D2E0E15E7674E008A7257 /* TrackViewController.h */,
-				EC7D2E0F15E7674E008A7257 /* TrackViewController.m */,
 				EC7D2DE515E74C35008A7257 /* AppDelegate.h */,
+				EC929AD315F0AFA500A1E75B /* EditGroupViewController.h */,
+				EC929AD415F0AFA500A1E75B /* EditGroupViewController.m */,
 				EC7D2E1115E78AFC008A7257 /* XTableController.h */,
 				EC7D2E1215E78AFC008A7257 /* XTableController.m */,
+				EC7D2E0E15E7674E008A7257 /* TrackViewController.h */,
+				EC7D2E0F15E7674E008A7257 /* TrackViewController.m */,
 				EC7D2E0B15E7634A008A7257 /* GroupViewController.h */,
 				EC7D2E0C15E7634A008A7257 /* GroupViewController.m */,
 				EC7D2DE615E74C35008A7257 /* AppDelegate.m */,
@@ -284,6 +289,7 @@
 				EC7D2E1015E7674F008A7257 /* TrackViewController.m in Sources */,
 				EC7D2E1315E78AFC008A7257 /* XTableController.m in Sources */,
 				EC87DBF215ECB83100121F85 /* ManagerSingleton.m in Sources */,
+				EC929AD515F0AFA500A1E75B /* EditGroupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

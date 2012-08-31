@@ -9,14 +9,13 @@
 #import "MainViewController.h"
 #import "XTableController.h"
 #import "ManagerSingleton.h"
+#import "TrackViewController.h"
 
 @interface MainViewController ()
    
 @property (retain, nonatomic) XTableController *xcontroller;
 @property (retain, nonatomic) IBOutlet UITableView *tableOfGroups;
 @property (retain, nonatomic) IBOutlet UIButton *selectGroup;
-
-
 
 @end
 
@@ -43,22 +42,17 @@
 - (void)viewDidLoad
 {
     ManagerSingleton *manager = [ManagerSingleton instance];
-    
-
     XTableController *controller = [[XTableController alloc]
                                     initWithArray:manager.arrayOfGroups];
     self.xcontroller = controller;
     [controller release];
-    [self.tableOfGroups setDelegate: self.xcontroller];
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    [self.tableOfGroups setDelegate: self];
     [self.tableOfGroups setDataSource: self.xcontroller];
+    
     [super viewDidLoad];
-  
-   
-    //[secondViewControl help];
-
-      // self.selectGroup = [[UIButton alloc] in];
+    [self.selectGroup setTitle:[manager.arrayOfGroups objectAtIndex:0] forState:0];
 }
-
 
 - (void)viewDidUnload
 {
@@ -73,9 +67,24 @@
 }
 
 - (void)setNewNameOnButton:(NSString *)name {
-    GroupViewController *secondViewControl = [[GroupViewController new] autorelease];
-	secondViewControl.groupDelegate = self;
     [self.selectGroup setTitle:name forState:0];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"GroupViewControllerSegue"]) {
+        GroupViewController *groupViewController = [segue destinationViewController];
+        groupViewController.groupDelegate = self;
+    }
+    if ([[segue identifier] isEqualToString:@"TrackViewControllerSegue"]) {
+        ManagerSingleton *manager = [ManagerSingleton instance];
+        TrackViewController *trackViewController = [segue destinationViewController];
+        trackViewController.arrayOfTracks =  [manager getAllTracksOfTheGroup:(NSMutableString *)sender];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"TrackViewControllerSegue" sender:cell.textLabel.text];
 }
 
 - (void)dealloc {

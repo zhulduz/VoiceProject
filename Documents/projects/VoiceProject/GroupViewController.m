@@ -60,19 +60,11 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-/*- (void)help {
-    if ((self.groupDelegate != nil) && [self.groupDelegate respondsToSelector:@selector(setNewNameOnButton:)]) {
-        [self performSelector:@selector(setNewNameOnButton:) withObject:@"ppp"];
-    NSLog(@"help");
-    }
 
-}
-*/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //SEL selector = @selector(setNewNameOnButton:);
-    if ((self.groupDelegate != nil) && [self.groupDelegate respondsToSelector:@selector(setNewNameOnButton:)]) {
+   if ((self.groupDelegate != nil) && [self.groupDelegate respondsToSelector:@selector(setNewNameOnButton:)]) {
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        [self performSelector:@selector(setNewNameOnButton:) withObject:cell.textLabel.text];
+        [self.groupDelegate performSelector:@selector(setNewNameOnButton:) withObject:cell.textLabel.text];
     }
 }
 

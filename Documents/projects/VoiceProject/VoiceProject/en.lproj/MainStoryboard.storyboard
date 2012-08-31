@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D2001" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ETQ-HA-T1T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ETQ-HA-T1T">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -46,7 +46,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5jf-1V-CwL">
-                                <rect key="frame" x="20" y="107" width="280" height="298"/>
+                                <rect key="frame" x="20" y="98" width="280" height="298"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -68,10 +68,36 @@
                     <connections>
                         <outlet property="selectGroup" destination="8OR-UD-f5r" id="RJM-s2-LRg"/>
                         <outlet property="tableOfGroups" destination="5jf-1V-CwL" id="gXH-bs-oEy"/>
+                        <segue destination="IA0-a4-z5P" kind="push" identifier="TrackViewControllerSegue" id="J4k-Hq-geM"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="428" y="267"/>
+        </scene>
+        <!--Track View Controller - List of groups-->
+        <scene sceneID="ScF-aY-Ps6">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cYW-0U-dfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="IA0-a4-z5P" customClass="TrackViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vpu-4c-c4h">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5Vv-nf-94s">
+                                <rect key="frame" x="20" y="63" width="280" height="334"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="List of groups" id="d5S-Iy-Wdx"/>
+                    <connections>
+                        <outlet property="tableOfTracks" destination="5Vv-nf-94s" id="1RS-tj-4bX"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="882" y="874"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="E1l-p2-JcH">
@@ -88,7 +114,7 @@
             </objects>
             <point key="canvasLocation" x="-21" y="257"/>
         </scene>
-        <!--Group View Controller - GROUPS-->
+        <!--Group View Controller - List of groups-->
         <scene sceneID="iov-dZ-kVL">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XTN-6z-EiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -98,20 +124,20 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="WII-dc-Zho">
-                                <rect key="frame" x="20" y="26" width="280" height="363"/>
+                                <rect key="frame" x="20" y="20" width="280" height="369"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="GROUPS" id="3cc-iB-ePS"/>
+                    <navigationItem key="navigationItem" title="List of groups" id="3cc-iB-ePS"/>
                     <connections>
                         <outlet property="tableOfGroups" destination="WII-dc-Zho" id="orF-X0-sGA"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="811" y="267"/>
+            <point key="canvasLocation" x="882" y="267"/>
         </scene>
     </scenes>
     <classes>
@@ -126,6 +152,12 @@
             <relationships>
                 <relationship kind="outlet" name="selectGroup" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tableOfGroups" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="TrackViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrackViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableOfTracks" candidateClass="UITableView"/>
             </relationships>
         </class>
     </classes>

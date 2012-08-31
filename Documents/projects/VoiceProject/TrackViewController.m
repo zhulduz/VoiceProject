@@ -7,12 +7,22 @@
 //
 
 #import "TrackViewController.h"
+#import "XTableController.h"
+#import "ManagerSingleton.h"
+#import "MainViewController.h"
 
 @interface TrackViewController ()
+
+@property (retain, nonatomic) XTableController *xcontroller;
+@property (retain, nonatomic) IBOutlet UITableView *tableOfTracks;
 
 @end
 
 @implementation TrackViewController
+
+@synthesize xcontroller;
+@synthesize tableOfTracks;
+@synthesize arrayOfTracks;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,13 +35,20 @@
 
 - (void)viewDidLoad
 {
+    XTableController *controller = [[XTableController alloc]
+                                    initWithArray:self.arrayOfTracks];
+    self.xcontroller = controller;
+    [controller release];
+    [self.tableOfTracks setDelegate: self.xcontroller];
+    [self.tableOfTracks setDataSource: self.xcontroller];
+    [self setTableOfTracks:nil];
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
+
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
+       [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
@@ -40,4 +57,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)dealloc {
+    [tableOfTracks release];
+    [super dealloc];
+}
 @end

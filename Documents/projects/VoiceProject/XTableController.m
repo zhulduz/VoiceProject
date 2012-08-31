@@ -7,7 +7,7 @@
 //
 
 #import "XTableController.h"
-#import "MainViewController.h"
+
 
 @interface XTableController ()
 
@@ -50,21 +50,13 @@
         //Creating cells
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 
                                        reuseIdentifier:CellIdentifier] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
-    
+
     cell.textLabel.text = [self.arrayOfData objectAtIndex:indexPath.row];
     
     return cell;
 }
-
-
-
-/*- (NSArray *) sectionIndexTitlesForTableView: (UITableView *) tableView {
-    NSMutableArray *values = [[NSMutableArray alloc] init];
-    [values addObject:@"Фрукты"];
-    [values addObject:@"Овощи"];
-    return values;
-}*/
 
 -(void)dealloc {
     [arrayOfData_ release];

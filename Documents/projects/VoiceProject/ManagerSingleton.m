@@ -99,7 +99,7 @@
     }
 }
 
-- (NSMutableArray *)getAllTracksOfTheGroup:(NSMutableArray *)nameOfGroup {
+- (NSMutableArray *)getAllTracksOfTheGroup:(NSMutableString *)nameOfGroup {
     NSMutableArray *arrayOfTracksAtTheGroup = [[NSMutableArray alloc] initWithCapacity:1];
     for (int i = 0; i < [self.arrayOfTracks count]; ++i) {
         if ([[[self.arrayOfTracks objectAtIndex:i] valueForKey:@"nameOfGroup"] isEqual:nameOfGroup]) {
