@@ -58,6 +58,14 @@
 }
 
 
+
+/*- (NSArray *) sectionIndexTitlesForTableView: (UITableView *) tableView {
+    NSMutableArray *values = [[NSMutableArray alloc] init];
+    [values addObject:@"Фрукты"];
+    [values addObject:@"Овощи"];
+    return values;
+}*/
+
 -(void)dealloc {
     [arrayOfData_ release];
     [super dealloc];

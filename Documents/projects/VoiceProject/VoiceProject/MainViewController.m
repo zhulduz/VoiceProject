@@ -43,14 +43,20 @@
 - (void)viewDidLoad
 {
     ManagerSingleton *manager = [ManagerSingleton instance];
+    
+
     XTableController *controller = [[XTableController alloc]
                                     initWithArray:manager.arrayOfGroups];
     self.xcontroller = controller;
     [controller release];
-    [self.selectGroup setTitle:<#(NSString *)#> forState:nil];
     [self.tableOfGroups setDelegate: self.xcontroller];
     [self.tableOfGroups setDataSource: self.xcontroller];
     [super viewDidLoad];
+  
+   
+    //[secondViewControl help];
+
+      // self.selectGroup = [[UIButton alloc] in];
 }
 
 
@@ -64,6 +70,12 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void)setNewNameOnButton:(NSString *)name {
+    GroupViewController *secondViewControl = [[GroupViewController new] autorelease];
+	secondViewControl.groupDelegate = self;
+    [self.selectGroup setTitle:name forState:0];
 }
 
 - (void)dealloc {

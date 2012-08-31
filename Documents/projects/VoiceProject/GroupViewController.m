@@ -7,20 +7,23 @@
 //
 
 #import "GroupViewController.h"
-#import "XTableControllerForGroupClass.h"
+#import "XTableController.h"
 #import "ManagerSingleton.h"
 
 @interface GroupViewController ()
 
-@property (retain, nonatomic) XTableControllerForGroupClass *xcontroller;
+@property (retain, nonatomic) XTableController *xcontroller;
 @property (retain, nonatomic) IBOutlet UITableView *tableOfGroups;
 
 @end
 
-@implementation GroupViewController
+@implementation GroupViewController {
+    id<RenameButton> groupDelegate;
+}
 
 @synthesize tableOfGroups;
 @synthesize xcontroller;
+@synthesize groupDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,12 +37,12 @@
 - (void)viewDidLoad
 {
     ManagerSingleton *manager = [ManagerSingleton instance];
-    XTableControllerForGroupClass *controller = [[XTableControllerForGroupClass alloc]
+    XTableController *controller = [[XTableController alloc]
                                  initWithArray:manager.arrayOfGroups];
  
     self.xcontroller = controller;
     [controller release];
-    [self.tableOfGroups setDelegate: self.xcontroller];
+    [self.tableOfGroups setDelegate: self];
     [self.tableOfGroups setDataSource: self.xcontroller];
 }
 
@@ -52,6 +55,25 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+/*- (void)help {
+    if ((self.groupDelegate != nil) && [self.groupDelegate respondsToSelector:@selector(setNewNameOnButton:)]) {
+        [self performSelector:@selector(setNewNameOnButton:) withObject:@"ppp"];
+    NSLog(@"help");
+    }
+
+}
+*/
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //SEL selector = @selector(setNewNameOnButton:);
+    if ((self.groupDelegate != nil) && [self.groupDelegate respondsToSelector:@selector(setNewNameOnButton:)]) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [self performSelector:@selector(setNewNameOnButton:) withObject:cell.textLabel.text];
+    }
 }
 
 - (void)dealloc {

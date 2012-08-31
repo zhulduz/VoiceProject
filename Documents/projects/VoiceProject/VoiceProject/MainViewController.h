@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GroupViewController.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController<RenameButton>
  
 @end
 

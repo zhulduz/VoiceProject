@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GroupViewController : UIViewController
+@protocol RenameButton
+
+- (void)setNewNameOnButton:(NSString *)name;
+
+@end
+
+
+@interface GroupViewController : UIViewController<UITableViewDelegate>
+
+@property (nonatomic, assign) id<RenameButton> groupDelegate;
 
 @end
