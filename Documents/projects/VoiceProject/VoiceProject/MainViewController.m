@@ -7,13 +7,13 @@
 //
 
 #import "MainViewController.h"
-#import "XTableController.h"
+#import "XEditTableController.h"
 #import "ManagerSingleton.h"
 #import "TrackViewController.h"
 
 @interface MainViewController ()
    
-@property (retain, nonatomic) XTableController *xcontroller;
+@property (retain, nonatomic) XEditTableController *xcontroller;
 @property (retain, nonatomic) IBOutlet UITableView *tableOfGroups;
 @property (retain, nonatomic) IBOutlet UIButton *selectGroup;
 
@@ -38,20 +38,51 @@
 - (IBAction)editButton:(UIBarButtonItem *)sender {
 }
 
-
 - (void)viewDidLoad
 {
     ManagerSingleton *manager = [ManagerSingleton instance];
-    XTableController *controller = [[XTableController alloc]
+    XEditTableController *controller = [[XEditTableController alloc]
                                     initWithArray:manager.arrayOfGroups];
     self.xcontroller = controller;
     [controller release];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    [self.tableOfGroups setDelegate: self];
-    [self.tableOfGroups setDataSource: self.xcontroller];
+    UIBarButtonItem *edit =[[[UIBarButtonItem alloc] 
+                             initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                             target:self
+                             action:@selector(editing)] autorelease];
+    self.navigationItem.leftBarButtonItem = edit;
     
+    [self.tableOfGroups setDelegate: self.xcontroller];
+    [self.tableOfGroups setDataSource: self.xcontroller];
     [super viewDidLoad];
     [self.selectGroup setTitle:[manager.arrayOfGroups objectAtIndex:0] forState:0];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    ManagerSingleton *manager = [ManagerSingleton instance];
+    [manager saveData];
+    [self.tableOfGroups reloadData];    
+}
+
+- (void)editing {
+    [self.tableOfGroups setEditing:!self.tableOfGroups.editing animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"TrackViewControllerSegue" sender:cell.textLabel.text];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"GroupViewControllerSegue"]) {
+        GroupViewController *groupViewController = [segue destinationViewController];
+        groupViewController.groupDelegate = self;
+    }
+    if ([[segue identifier] isEqualToString:@"TrackViewControllerSegue"]) {
+        ManagerSingleton *manager = [ManagerSingleton instance];
+        TrackViewController *trackViewController = [segue destinationViewController];
+        trackViewController.arrayOfTracks =  [manager getAllTracksOfTheGroup:(NSMutableString *)sender];
+    }
 }
 
 - (void)viewDidUnload
@@ -68,23 +99,6 @@
 
 - (void)setNewNameOnButton:(NSString *)name {
     [self.selectGroup setTitle:name forState:0];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"GroupViewControllerSegue"]) {
-        GroupViewController *groupViewController = [segue destinationViewController];
-        groupViewController.groupDelegate = self;
-    }
-    if ([[segue identifier] isEqualToString:@"TrackViewControllerSegue"]) {
-        ManagerSingleton *manager = [ManagerSingleton instance];
-        TrackViewController *trackViewController = [segue destinationViewController];
-        trackViewController.arrayOfTracks =  [manager getAllTracksOfTheGroup:(NSMutableString *)sender];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"TrackViewControllerSegue" sender:cell.textLabel.text];
 }
 
 - (void)dealloc {

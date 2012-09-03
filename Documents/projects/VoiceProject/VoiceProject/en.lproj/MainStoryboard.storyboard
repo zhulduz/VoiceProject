@@ -27,7 +27,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="oKe-Vd-Bnb" kind="push" id="WI6-9F-B19"/>
+                                    <segue destination="oKe-Vd-Bnb" kind="push" identifier="GroupViewControllerSegue" id="WI6-9F-B19"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tmw-Ui-03n" colorLabel="IBBuiltInLabel-Red">
@@ -62,6 +62,7 @@
                         <barButtonItem key="rightBarButtonItem" title="+" id="g9I-vn-kCB">
                             <connections>
                                 <action selector="plusButton:" destination="2" id="xJS-Pl-8PN"/>
+                                <segue destination="OlP-P2-COd" kind="push" identifier="AdditionGroupSegue" id="3cf-2I-IKR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -74,6 +75,47 @@
             </objects>
             <point key="canvasLocation" x="428" y="267"/>
         </scene>
+        <!--Addition Group View Controller - Add group-->
+        <scene sceneID="XSg-r0-l7R">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nad-Pc-E9R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="OlP-P2-COd" customClass="AdditionGroupViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bsT-fC-seB">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" id="DDh-fw-6Bu">
+                                <rect key="frame" x="20" y="20" width="280" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fWa-eN-wi9">
+                                <rect key="frame" x="108" y="66" width="104" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="add">
+                                    <color key="titleColor" red="0.6391495519" green="0.28319668370000001" blue="0.89003057070000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addGroup:" destination="OlP-P2-COd" eventType="touchUpInside" id="MBn-Rw-hbd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add group" id="QSk-sv-RiX"/>
+                    <connections>
+                        <outlet property="additionalGroup" destination="DDh-fw-6Bu" id="vPd-No-TS1"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="428" y="882"/>
+        </scene>
         <!--Track View Controller - List of groups-->
         <scene sceneID="ScF-aY-Ps6">
             <objects>
@@ -84,7 +126,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5Vv-nf-94s">
-                                <rect key="frame" x="20" y="63" width="280" height="334"/>
+                                <rect key="frame" x="20" y="20" width="280" height="377"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -141,6 +183,12 @@
         </scene>
     </scenes>
     <classes>
+        <class className="AdditionGroupViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AdditionGroupViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="additionalGroup" candidateClass="UITextField"/>
+            </relationships>
+        </class>
         <class className="GroupViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GroupViewController.h"/>
             <relationships>

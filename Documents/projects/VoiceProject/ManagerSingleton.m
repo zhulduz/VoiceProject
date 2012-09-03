@@ -28,16 +28,16 @@
 - (id)init {
     if ((self = [super init])) {
         //reading from file
-        /*[self readFromFile:@"1.txt" ToArray:self.arrayOfGroups];
+        [self readFromFile:@"1.txt" ToArray:self.arrayOfGroups];
         if (self.arrayOfGroups == nil) {
             self.arrayOfGroups = [[NSMutableArray alloc] initWithObjects:@"group0", nil];
         }
         [self readFromFile:@"2.txt" ToArray:self.arrayOfTracks];
         if (self.arrayOfTracks == nil) {
             self.arrayOfTracks = [[NSMutableArray alloc] initWithCapacity:1];
-        }*/
-        self.arrayOfGroups = [[NSMutableArray alloc] initWithObjects:@"group0",@"group1", @"group2",@"group3",@"group4",@"group5",nil];
-        self.arrayOfTracks = [[NSMutableArray alloc] initWithObjects:[[NSMutableDictionary alloc] initWithObjects:[NSMutableArray arrayWithObjects: @"tracks1",@"group1", nil] forKeys:[NSMutableArray arrayWithObjects: @"nameOfTrack",@"nameOfGroup", nil]], nil];
+        }
+       /* self.arrayOfGroups = [[NSMutableArray alloc] initWithObjects:@"group0",@"group1", @"group2",@"group3",@"group4",@"group5",nil];
+        self.arrayOfTracks = [[NSMutableArray alloc] initWithObjects:[[NSMutableDictionary alloc] initWithObjects:[NSMutableArray arrayWithObjects: @"tracks1",@"group1", nil] forKeys:[NSMutableArray arrayWithObjects: @"nameOfTrack",@"nameOfGroup", nil]], [[NSMutableDictionary alloc] initWithObjects:[NSMutableArray arrayWithObjects: @"tracks2",@"group2", nil] forKeys:[NSMutableArray arrayWithObjects: @"nameOfTrack",@"nameOfGroup", nil]], [[NSMutableDictionary alloc] initWithObjects:[NSMutableArray arrayWithObjects: @"tracks3",@"group2", nil] forKeys:[NSMutableArray arrayWithObjects: @"nameOfTrack",@"nameOfGroup", nil]],nil];*/
     }
     return self;
 }
