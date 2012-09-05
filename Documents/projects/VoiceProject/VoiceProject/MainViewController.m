@@ -12,25 +12,22 @@
 #import "TrackViewController.h"
 
 @interface MainViewController ()
-   
+
 @property (retain, nonatomic) XEditTableController *xcontroller;
 @property (retain, nonatomic) IBOutlet UITableView *tableOfGroups;
 @property (retain, nonatomic) IBOutlet UIButton *selectGroup;
+@property (retain, nonatomic) IBOutlet UIButton *voiceButton;
 
 @end
 
-@implementation MainViewController {
-     NSMutableArray *groups;
-}
+@implementation MainViewController 
+
+NSString *const keyForNotification = @"reloadTableOfGroup";
 
 @synthesize xcontroller;
 @synthesize tableOfGroups;
 @synthesize selectGroup;
-
-
-- (IBAction)voiceButton:(UIButton *)sender {
-}
-
+@synthesize voiceButton;
 
 - (IBAction)plusButton:(id)sender {
 }
@@ -42,9 +39,15 @@
 {
     ManagerSingleton *manager = [ManagerSingleton instance];
     XEditTableController *controller = [[XEditTableController alloc]
-                                    initWithArray:manager.arrayOfGroups];
+                                    initWithArray:[manager arrayOfGroups]];
     self.xcontroller = controller;
     [controller release];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(reloadTableOfGroup:) 
+                                                 name:keyForNotification 
+                                               object:nil];
+    
     self.view.backgroundColor = [UIColor lightGrayColor];
     UIBarButtonItem *edit =[[[UIBarButtonItem alloc] 
                              initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
@@ -52,25 +55,19 @@
                              action:@selector(editing)] autorelease];
     self.navigationItem.leftBarButtonItem = edit;
     
-    [self.tableOfGroups setDelegate: self.xcontroller];
+    [self.tableOfGroups setDelegate: self];
     [self.tableOfGroups setDataSource: self.xcontroller];
     [super viewDidLoad];
     [self.selectGroup setTitle:[manager.arrayOfGroups objectAtIndex:0] forState:0];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    ManagerSingleton *manager = [ManagerSingleton instance];
-    [manager saveData];
+- (void)reloadTableOfGroup:(NSNotification *)notification {
     [self.tableOfGroups reloadData];    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:keyForNotification object:nil];
 }
 
 - (void)editing {
     [self.tableOfGroups setEditing:!self.tableOfGroups.editing animated:YES];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"TrackViewControllerSegue" sender:cell.textLabel.text];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -85,10 +82,16 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"TrackViewControllerSegue" sender:cell.textLabel.text];
+}
+
 - (void)viewDidUnload
 {
     [self setTableOfGroups:nil];
     [self setSelectGroup:nil];
+    [self setVoiceButton:nil];
     [super viewDidUnload];
 }
 
@@ -105,6 +108,7 @@
     [xcontroller release];
     [tableOfGroups release];
     [selectGroup release];
+    [voiceButton release];
     [super dealloc];
 }
 @end

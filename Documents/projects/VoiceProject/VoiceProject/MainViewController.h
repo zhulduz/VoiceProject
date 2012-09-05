@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GroupViewController.h"
 
+extern NSString *const keyForNotification;
+
 @interface MainViewController : UIViewController<RenameButton, UITableViewDelegate>
  
 @end

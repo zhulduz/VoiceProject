@@ -28,7 +28,6 @@
     return self;
 }
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -56,29 +55,14 @@
     return cell;
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView 
-           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-    if (indexPath.row == 0) {
-        return UITableViewCellEditingStyleInsert;
-    } else {
-        return UITableViewCellEditingStyleDelete;
-    }
-}
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    ManagerSingleton *manager = [ManagerSingleton instance];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        ManagerSingleton *manager = [ManagerSingleton instance];
         [self.arrayOfData removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
                          withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        
-        [self.arrayOfData insertObject:@"Tutorial" atIndex:0];
-        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                         withRowAnimation:UITableViewRowAnimationFade];
+        [manager saveData];
     }
-    [manager saveData];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,6 +79,5 @@
     [arrayOfData_ release];
     [super dealloc];
 }
-
 
 @end

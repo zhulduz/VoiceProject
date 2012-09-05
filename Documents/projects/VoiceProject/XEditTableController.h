@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XEditTableController : NSObject<UITableViewDataSource, UITableViewDelegate>
+@interface XEditTableController : NSObject<UITableViewDataSource>
 
 - (id)initWithArray:(NSMutableArray *)groups;
 
@@ -19,5 +19,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)index_path;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
 
 @end

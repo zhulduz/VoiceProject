@@ -39,7 +39,6 @@
     ManagerSingleton *manager = [ManagerSingleton instance];
     XTableController *controller = [[XTableController alloc]
                                  initWithArray:manager.arrayOfGroups];
- 
     self.xcontroller = controller;
     [controller release];
     [self.tableOfGroups setDelegate: self];

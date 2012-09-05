@@ -17,36 +17,60 @@
 @synthesize arrayOfTracks = arrayOfTracks_;
 
 + (ManagerSingleton *)instance {
-    static ManagerSingleton *instance = nil;
+    static ManagerSingleton *_default = nil;
+    if (_default != nil) {
+        return _default;
+    }
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[self alloc]init];
+        _default = [[self alloc] init];
     });
-    return instance;
+    return _default;
 }
 
 - (id)init {
     if ((self = [super init])) {
         //reading from file
-        [self readFromFile:@"1.txt" ToArray:self.arrayOfGroups];
+        self.arrayOfGroups = [self readFromFile:@"1.txt"];
         if (self.arrayOfGroups == nil) {
             self.arrayOfGroups = [[NSMutableArray alloc] initWithObjects:@"group0", nil];
         }
-        [self readFromFile:@"2.txt" ToArray:self.arrayOfTracks];
+        self.arrayOfTracks = [self readFromFile:@"2.txt"];
         if (self.arrayOfTracks == nil) {
             self.arrayOfTracks = [[NSMutableArray alloc] initWithCapacity:1];
         }
-       /* self.arrayOfGroups = [[NSMutableArray alloc] initWithObjects:@"group0",@"group1", @"group2",@"group3",@"group4",@"group5",nil];
-        self.arrayOfTracks = [[NSMutableArray alloc] initWithObjects:[[NSMutableDictionary alloc] initWithObjects:[NSMutableArray arrayWithObjects: @"tracks1",@"group1", nil] forKeys:[NSMutableArray arrayWithObjects: @"nameOfTrack",@"nameOfGroup", nil]], [[NSMutableDictionary alloc] initWithObjects:[NSMutableArray arrayWithObjects: @"tracks2",@"group2", nil] forKeys:[NSMutableArray arrayWithObjects: @"nameOfTrack",@"nameOfGroup", nil]], [[NSMutableDictionary alloc] initWithObjects:[NSMutableArray arrayWithObjects: @"tracks3",@"group2", nil] forKeys:[NSMutableArray arrayWithObjects: @"nameOfTrack",@"nameOfGroup", nil]],nil];*/
     }
     return self;
 }
 
-- (void)readFromFile:(NSString *)fileName ToArray:(NSMutableArray *)array {
+- (NSMutableArray *)readFromFile:(NSString *)fileName {
     NSFileManager * fmanager = [NSFileManager defaultManager];
+    if (![fmanager fileExistsAtPath:[self documentPath:fileName]]) {
+        return nil;
+    }
     NSData *data = [fmanager contentsAtPath:[self documentPath:fileName]];
     NSString *stringOfData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    array = [stringOfData componentsSeparatedByString:@" "];
+    NSLog(@"str %@", stringOfData);
+    if (!stringOfData) {
+        return nil;
+    } else {
+        if ([fileName isEqualToString:@"1.txt"]) {
+            return [[stringOfData componentsSeparatedByString:@" "] autorelease];
+        } else {
+            NSMutableArray *arrayOfElemOfStringOfData = [stringOfData componentsSeparatedByString:@"\n"];
+            NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:1];
+            [arrayOfElemOfStringOfData removeLastObject];
+            NSLog(@"arr count %d", [arrayOfElemOfStringOfData count]);
+            for (int i = 0; i < [arrayOfElemOfStringOfData count]; ++i) {
+                NSMutableDictionary *elem = [[NSMutableDictionary alloc] initWithCapacity:1];
+                NSLog(@"arr[1] %@", [[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:1]);
+                [elem setObject:[[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:0]forKey:@"nameOfGroup"];
+                [elem setObject:[[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:1]forKey:@"nameOfTrack"];
+                [result addObject:elem];
+            }
+            return [result autorelease];
+        }
+    }
 }
 
 - (NSString *)documentPath:(NSString *)file_name
@@ -68,10 +92,10 @@
     if (findGroup == nil) {
         [self addGroup:nameOfGroup];
     }
-    NSMutableDictionary *trackSign = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:nameOfTrack, nameOfGroup, nil] forKeys:[NSArray arrayWithObjects:@"nameOfTrack",@"nameOfGroup", nil]];
-    
+    NSMutableDictionary *trackSign = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:nameOfTrack, nameOfGroup, nil] 
+                                                                          forKeys:[NSArray arrayWithObjects:@"nameOfTrack",@"nameOfGroup", nil]];
     [self.arrayOfTracks addObject:trackSign];
-    
+     NSLog(@"%@", self.arrayOfTracks);
 }
 
 - (NSMutableString *)searchGroupWithName:(NSMutableString *)nameOfGroup {
@@ -126,6 +150,20 @@
 - (void)saveData {
     NSFileManager *fmanager = [NSFileManager defaultManager]; 
     [fmanager createFileAtPath:[self documentPath:@"1.txt"] contents:[[self.arrayOfGroups componentsJoinedByString:@" "] dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+    
+    NSMutableString *fileContent = [[NSMutableString alloc] initWithCapacity:1];
+    NSMutableDictionary *elem = [[NSMutableDictionary alloc] initWithCapacity:1];
+    for (int i = 0; i < [self.arrayOfTracks count]; ++i) {
+        ///elem = [self.arrayOfTracks objectAtIndex:i];
+        [fileContent appendString:[[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfGroup"]];
+        [fileContent appendString:@" "];
+        [fileContent appendString:[[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfTrack"]];
+        [fileContent appendString:@"\n"];
+    }
+    [fmanager createFileAtPath:[self documentPath:@"2.txt"] contents:[fileContent dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+    [elem release];
+    [fileContent release];
 }
+
 
 @end

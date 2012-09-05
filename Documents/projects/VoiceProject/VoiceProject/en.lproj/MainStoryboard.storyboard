@@ -42,7 +42,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="voiceButton:" destination="2" eventType="touchUpInside" id="LWO-PH-Rmk"/>
+                                    <segue destination="J13-hC-fBp" kind="push" identifier="RecordViewControllerSegue" id="7hi-SK-Msl"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5jf-1V-CwL">
@@ -54,11 +54,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="QtA-uz-VtH">
-                        <barButtonItem key="leftBarButtonItem" title="EDIT" id="q4X-Cj-xGW">
-                            <connections>
-                                <action selector="editButton:" destination="2" id="GZ9-25-rbr"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" id="g9I-vn-kCB">
                             <connections>
                                 <action selector="plusButton:" destination="2" id="xJS-Pl-8PN"/>
@@ -69,6 +64,7 @@
                     <connections>
                         <outlet property="selectGroup" destination="8OR-UD-f5r" id="RJM-s2-LRg"/>
                         <outlet property="tableOfGroups" destination="5jf-1V-CwL" id="gXH-bs-oEy"/>
+                        <outlet property="voiceButton" destination="tmw-Ui-03n" id="MDb-L4-fWI"/>
                         <segue destination="IA0-a4-z5P" kind="push" identifier="TrackViewControllerSegue" id="J4k-Hq-geM"/>
                     </connections>
                 </viewController>
@@ -114,7 +110,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="428" y="882"/>
+            <point key="canvasLocation" x="428" y="1158"/>
         </scene>
         <!--Track View Controller - List of groups-->
         <scene sceneID="ScF-aY-Ps6">
@@ -139,7 +135,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="882" y="874"/>
+            <point key="canvasLocation" x="930" y="1204"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="E1l-p2-JcH">
@@ -179,7 +175,64 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="882" y="267"/>
+            <point key="canvasLocation" x="956" y="-221"/>
+        </scene>
+        <!--Record View Controller - Record voice-->
+        <scene sceneID="sPi-s3-ca9">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nVT-mH-n0D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="J13-hC-fBp" customClass="RecordViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LCW-hC-T0x">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="fF4-do-FwW">
+                                <rect key="frame" x="20" y="20" width="280" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FZW-Yn-1vt">
+                                <rect key="frame" x="106" y="59" width="109" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="add group">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="oKe-Vd-Bnb" kind="push" identifier="ChoseGroupForTrackSegue" id="RPk-m5-h5b"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ft2-cg-hJQ">
+                                <rect key="frame" x="114" y="104" width="93" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="add track">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addTrackButton:" destination="J13-hC-fBp" eventType="touchUpInside" id="iLr-CF-VdX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Record voice" id="PFD-E7-4bJ"/>
+                    <connections>
+                        <outlet property="addGroupForTrack" destination="FZW-Yn-1vt" id="aaD-Em-tZ2"/>
+                        <outlet property="additionalTrack" destination="fF4-do-FwW" id="cHN-Zw-3Le"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="939" y="553"/>
         </scene>
     </scenes>
     <classes>
@@ -200,6 +253,14 @@
             <relationships>
                 <relationship kind="outlet" name="selectGroup" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tableOfGroups" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="voiceButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="RecordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addGroupForTrack" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="additionalTrack" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="TrackViewController" superclassName="UIViewController">
@@ -214,4 +275,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="RPk-m5-h5b"/>
+    </inferredMetricsTieBreakers>
 </document>

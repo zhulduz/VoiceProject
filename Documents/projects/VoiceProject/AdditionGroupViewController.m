@@ -8,6 +8,7 @@
 
 #import "AdditionGroupViewController.h"
 #import "ManagerSingleton.h"
+#import "MainViewController.h"
 
 @interface AdditionGroupViewController ()
 @property (retain, nonatomic) IBOutlet UITextField *additionalGroup;
@@ -19,11 +20,12 @@
 @synthesize additionalGroup;
 
 - (IBAction)addGroup:(id)sender {
-    ManagerSingleton *manager = [ManagerSingleton instance];
     if (self.additionalGroup.text) {
+        ManagerSingleton *manager = [ManagerSingleton instance];
         [manager.arrayOfGroups addObject:self.additionalGroup.text];
         [manager saveData];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotification object:nil];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
