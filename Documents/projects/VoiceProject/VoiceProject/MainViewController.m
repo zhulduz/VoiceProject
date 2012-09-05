@@ -16,11 +16,22 @@
 @property (retain, nonatomic) XEditTableController *xcontroller;
 @property (retain, nonatomic) IBOutlet UITableView *tableOfGroups;
 @property (retain, nonatomic) IBOutlet UIButton *selectGroup;
+
 @property (retain, nonatomic) IBOutlet UIButton *voiceButton;
+@property (retain, nonatomic) AVAudioRecorder *audioRecorder;
+@property (retain, nonatomic) NSURL *fileOfTracks;
+
+- (IBAction)recordOrStop:(id)sender;
+- (IBAction)play;
 
 @end
 
-@implementation MainViewController 
+@implementation MainViewController {
+    AVAudioRecorder *audioRecorder;
+    NSURL *fileOfTracks;
+    BOOL recording;
+}
+
 
 NSString *const keyForNotification = @"reloadTableOfGroup";
 
@@ -28,6 +39,8 @@ NSString *const keyForNotification = @"reloadTableOfGroup";
 @synthesize tableOfGroups;
 @synthesize selectGroup;
 @synthesize voiceButton;
+@synthesize audioRecorder;
+@synthesize fileOfTracks;
 
 - (IBAction)plusButton:(id)sender {
 }
@@ -59,6 +72,65 @@ NSString *const keyForNotification = @"reloadTableOfGroup";
     [self.tableOfGroups setDataSource: self.xcontroller];
     [super viewDidLoad];
     [self.selectGroup setTitle:[manager.arrayOfGroups objectAtIndex:0] forState:0];
+    
+    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
+                                                            NSUserDomainMask,   
+                                                            YES);
+    NSString *docPathList = [pathList objectAtIndex:0];
+    NSString *soundFilePath =[docPathList stringByAppendingPathComponent:@"tracks.caf"];
+    NSURL *newURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    self.fileOfTracks = newURL;
+    [newURL release];
+    NSDictionary *recordSettings = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithFloat:44100.0], AVSampleRateKey, [NSNumber numberWithInt:kAudioFormatAppleLossless], AVFormatIDKey, [NSNumber numberWithInt:1], AVNumberOfChannelsKey, [NSNumber numberWithInt:AVAudioQualityMax], AVEncoderAudioQualityKey, nil];
+    self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:newURL settings:recordSettings error:nil];
+    recording = false;
+}
+
+-(IBAction)play
+{
+    AVAudioPlayer *player =[[AVAudioPlayer alloc] initWithContentsOfURL:self.fileOfTracks error:nil];
+    
+    [player prepareToPlay];
+    [player play];
+}
+
+- (IBAction) recordOrStop:(id)sender {
+    if (recording) {
+        [self.audioRecorder stop];
+        recording = false;
+        self.audioRecorder = nil;
+        [self.voiceButton setTitle: @"Record" forState:UIControlStateNormal];
+        [self.voiceButton setTitle: @"Record" forState:UIControlStateHighlighted];
+        [[AVAudioSession sharedInstance] setActive: NO error: nil];
+        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: nil];
+        [[AVAudioSession sharedInstance] setActive: YES error: nil];
+    } else {
+        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryRecord error: nil];
+        [[AVAudioSession sharedInstance] setActive: YES error: nil];
+        NSDictionary *recordSettings =[[NSDictionary alloc] initWithObjectsAndKeys:
+                                       [NSNumber numberWithFloat: 44100.0], AVSampleRateKey,
+                                       [NSNumber numberWithInt: kAudioFormatAppleLossless],  AVFormatIDKey,
+                                       [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
+                                       [NSNumber numberWithInt: AVAudioQualityMax], AVEncoderAudioQualityKey, nil];
+        AVAudioRecorder *newRecorder =[[AVAudioRecorder alloc] initWithURL:self.fileOfTracks 
+                                                                  settings: recordSettings error: nil];
+        [recordSettings release];
+        self.audioRecorder = newRecorder;
+        [newRecorder release];
+        self.audioRecorder.delegate = self;
+        [self.audioRecorder prepareToRecord];
+        [self.audioRecorder record];
+        [self.voiceButton setTitle: @"Stop" forState: UIControlStateNormal];
+        [self.voiceButton setTitle: @"Stop" forState: UIControlStateHighlighted];
+        recording = true;
+    }
+}
+
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
+    NSLog(@"success");
+}
+- (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error {
+    NSLog(@"fail");
 }
 
 - (void)reloadTableOfGroup:(NSNotification *)notification {
@@ -87,16 +159,14 @@ NSString *const keyForNotification = @"reloadTableOfGroup";
     [self performSegueWithIdentifier:@"TrackViewControllerSegue" sender:cell.textLabel.text];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setTableOfGroups:nil];
     [self setSelectGroup:nil];
     [self setVoiceButton:nil];
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 

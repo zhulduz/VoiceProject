@@ -13,13 +13,23 @@
 
 @property (retain, nonatomic) IBOutlet UITextField *additionalTrack;
 @property (retain, nonatomic) IBOutlet UIButton *addGroupForTrack;
+@property (retain, nonatomic) IBOutlet UIButton *playButton;
+@property (retain, nonatomic) IBOutlet UIButton *recordOrStopButton;
+
+
 
 @end
 
-@implementation RecordViewController
+@implementation RecordViewController 
+
 
 @synthesize additionalTrack;
 @synthesize addGroupForTrack;
+@synthesize playButton;
+@synthesize recordOrStopButton;
+
+
+
 
 - (IBAction)addTrackButton:(id)sender {
     if (self.additionalTrack.text && ![self.addGroupForTrack.titleLabel.text isEqual:@"add group"]) {
@@ -39,8 +49,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"ChoseGroupForTrackSegue"]) {
@@ -56,6 +66,8 @@
 - (void)viewDidUnload {
     [self setAdditionalTrack:nil];
     [self setAddGroupForTrack:nil];
+    [self setPlayButton:nil];
+    [self setRecordOrStopButton:nil];
     [super viewDidUnload];
 }
 
@@ -66,6 +78,8 @@
 - (void)dealloc {
     [additionalTrack release];
     [addGroupForTrack release];
+    [playButton release];
+    [recordOrStopButton release];
     [super dealloc];
 }
 @end

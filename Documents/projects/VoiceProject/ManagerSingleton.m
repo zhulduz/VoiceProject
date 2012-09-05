@@ -50,7 +50,6 @@
     }
     NSData *data = [fmanager contentsAtPath:[self documentPath:fileName]];
     NSString *stringOfData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"str %@", stringOfData);
     if (!stringOfData) {
         return nil;
     } else {
@@ -60,10 +59,8 @@
             NSMutableArray *arrayOfElemOfStringOfData = [stringOfData componentsSeparatedByString:@"\n"];
             NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:1];
             [arrayOfElemOfStringOfData removeLastObject];
-            NSLog(@"arr count %d", [arrayOfElemOfStringOfData count]);
             for (int i = 0; i < [arrayOfElemOfStringOfData count]; ++i) {
                 NSMutableDictionary *elem = [[NSMutableDictionary alloc] initWithCapacity:1];
-                NSLog(@"arr[1] %@", [[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:1]);
                 [elem setObject:[[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:0]forKey:@"nameOfGroup"];
                 [elem setObject:[[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:1]forKey:@"nameOfTrack"];
                 [result addObject:elem];
@@ -95,7 +92,6 @@
     NSMutableDictionary *trackSign = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:nameOfTrack, nameOfGroup, nil] 
                                                                           forKeys:[NSArray arrayWithObjects:@"nameOfTrack",@"nameOfGroup", nil]];
     [self.arrayOfTracks addObject:trackSign];
-     NSLog(@"%@", self.arrayOfTracks);
 }
 
 - (NSMutableString *)searchGroupWithName:(NSMutableString *)nameOfGroup {
