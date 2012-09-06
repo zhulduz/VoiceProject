@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TrackViewController : UIViewController
+@interface TrackViewController : UIViewController<UITableViewDelegate>
 
 @property (retain, nonatomic) NSMutableArray *arrayOfTracks;
 

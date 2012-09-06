@@ -23,10 +23,12 @@
 		EC7D2E0D15E7634A008A7257 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E0C15E7634A008A7257 /* GroupViewController.m */; };
 		EC7D2E1015E7674F008A7257 /* TrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E0F15E7674E008A7257 /* TrackViewController.m */; };
 		EC7D2E1315E78AFC008A7257 /* XTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2E1215E78AFC008A7257 /* XTableController.m */; };
+		EC8789FA15F8A2F300C30178 /* TrackEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8789F915F8A2F300C30178 /* TrackEditViewController.m */; };
 		EC87DBF215ECB83100121F85 /* ManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = EC87DBF115ECB83100121F85 /* ManagerSingleton.m */; };
 		EC88281A15F49B4E00237DAF /* AdditionGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC88281915F49B4E00237DAF /* AdditionGroupViewController.m */; };
 		EC9272F515F5C2C7006BDB51 /* XEditTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9272F415F5C2C7006BDB51 /* XEditTableController.m */; };
 		EC9272F815F5F64D006BDB51 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9272F715F5F64D006BDB51 /* RecordViewController.m */; };
+		ECAC769E15F8BE7E009A8A8A /* AdditionTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAC769D15F8BE7E009A8A8A /* AdditionTrackViewController.m */; };
 		ECD34D5915F7241000671AA0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD34D5815F7241000671AA0 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		EC7D2E0F15E7674E008A7257 /* TrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackViewController.m; path = ../TrackViewController.m; sourceTree = "<group>"; };
 		EC7D2E1115E78AFC008A7257 /* XTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XTableController.h; path = ../XTableController.h; sourceTree = "<group>"; };
 		EC7D2E1215E78AFC008A7257 /* XTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XTableController.m; path = ../XTableController.m; sourceTree = "<group>"; };
+		EC8789F815F8A2F300C30178 /* TrackEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackEditViewController.h; path = ../TrackEditViewController.h; sourceTree = "<group>"; };
+		EC8789F915F8A2F300C30178 /* TrackEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackEditViewController.m; path = ../TrackEditViewController.m; sourceTree = "<group>"; };
 		EC87DBF015ECB83100121F85 /* ManagerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManagerSingleton.h; path = ../ManagerSingleton.h; sourceTree = "<group>"; };
 		EC87DBF115ECB83100121F85 /* ManagerSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManagerSingleton.m; path = ../ManagerSingleton.m; sourceTree = "<group>"; };
 		EC88281815F49B4E00237DAF /* AdditionGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdditionGroupViewController.h; path = ../AdditionGroupViewController.h; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 		EC9272F415F5C2C7006BDB51 /* XEditTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XEditTableController.m; path = ../XEditTableController.m; sourceTree = "<group>"; };
 		EC9272F615F5F64D006BDB51 /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
 		EC9272F715F5F64D006BDB51 /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
+		ECAC769C15F8BE7E009A8A8A /* AdditionTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdditionTrackViewController.h; path = ../AdditionTrackViewController.h; sourceTree = "<group>"; };
+		ECAC769D15F8BE7E009A8A8A /* AdditionTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdditionTrackViewController.m; path = ../AdditionTrackViewController.m; sourceTree = "<group>"; };
 		ECD34D5815F7241000671AA0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -138,12 +144,16 @@
 			children = (
 				EC7D2DE515E74C35008A7257 /* AppDelegate.h */,
 				EC7D2DE615E74C35008A7257 /* AppDelegate.m */,
+				ECAC769C15F8BE7E009A8A8A /* AdditionTrackViewController.h */,
+				ECAC769D15F8BE7E009A8A8A /* AdditionTrackViewController.m */,
 				EC88281815F49B4E00237DAF /* AdditionGroupViewController.h */,
 				EC88281915F49B4E00237DAF /* AdditionGroupViewController.m */,
 				EC9272F315F5C2C7006BDB51 /* XEditTableController.h */,
 				EC9272F415F5C2C7006BDB51 /* XEditTableController.m */,
 				EC7D2E1115E78AFC008A7257 /* XTableController.h */,
 				EC7D2E1215E78AFC008A7257 /* XTableController.m */,
+				EC8789F815F8A2F300C30178 /* TrackEditViewController.h */,
+				EC8789F915F8A2F300C30178 /* TrackEditViewController.m */,
 				EC7D2E0E15E7674E008A7257 /* TrackViewController.h */,
 				EC7D2E0F15E7674E008A7257 /* TrackViewController.m */,
 				EC7D2E0B15E7634A008A7257 /* GroupViewController.h */,
@@ -306,6 +316,8 @@
 				EC88281A15F49B4E00237DAF /* AdditionGroupViewController.m in Sources */,
 				EC9272F515F5C2C7006BDB51 /* XEditTableController.m in Sources */,
 				EC9272F815F5F64D006BDB51 /* RecordViewController.m in Sources */,
+				EC8789FA15F8A2F300C30178 /* TrackEditViewController.m in Sources */,
+				ECAC769E15F8BE7E009A8A8A /* AdditionTrackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

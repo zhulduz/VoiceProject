@@ -1,90 +1,69 @@
 //
-//  ViewController.m
+//  TrackEditViewController.m
 //  VoiceProject
 //
-//  Created by trainee on 8/24/12.
+//  Created by trainee on 9/6/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MainViewController.h"
-#import "XEditTableController.h"
+#import "TrackEditViewController.h"
 #import "ManagerSingleton.h"
-#import "TrackViewController.h"
 
-@interface MainViewController ()
+@interface TrackEditViewController ()
 
-@property (retain, nonatomic) XEditTableController *xcontroller;
-@property (retain, nonatomic) IBOutlet UITableView *tableOfGroups;
-@property (retain, nonatomic) IBOutlet UIButton *selectGroup;
-
+@property (retain, nonatomic) IBOutlet UIButton *trackNameButton;
+@property (retain, nonatomic) IBOutlet UIButton *groupNameButton;
 @property (retain, nonatomic) IBOutlet UIButton *voiceButton;
-@property (retain, nonatomic) AVAudioRecorder *audioRecorder;
+
+@property (retain,nonatomic) AVAudioRecorder *audioRecorder;
 @property (retain, nonatomic) NSURL *fileOfTrack;
-@property (retain, nonatomic) NSString *nameOfTrack;
 
 
+- (IBAction)play:(id)sender;
 - (IBAction)recordOrStop:(id)sender;
-//- (IBAction)play;
 
 @end
 
-@implementation MainViewController {
-    AVAudioRecorder *audioRecorder;
+@implementation TrackEditViewController {
     BOOL recording;
 }
 
-
-NSString *const keyForNotification = @"reloadTableOfGroup";
-
-@synthesize xcontroller;
-@synthesize tableOfGroups;
-@synthesize selectGroup;
+@synthesize groupNameButton;
 @synthesize voiceButton;
+@synthesize trackNameButton;
+@synthesize nameOfButton;
 @synthesize audioRecorder;
 @synthesize fileOfTrack;
-@synthesize nameOfTrack;
 
-- (IBAction)plusButton:(id)sender {
-}
-- (IBAction)addTrackButton:(id)sender {
-    ManagerSingleton *manager = [ManagerSingleton instance];
-    if (self.fileOfTrack) {
-        [manager addtrack:self.nameOfTrack AtGroup:self.selectGroup.titleLabel.text];
+- (IBAction)saveChanges:(id)sender {
+    if (self.trackNameButton && self.groupNameButton) {
+        ManagerSingleton *manager = [ManagerSingleton instance];
+        [manager renameTrack:self.nameOfButton ToNewGroup:self.trackNameButton.titleLabel.text];
         [manager saveData];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTableOfTrack" object:nil];
 }
 
-- (IBAction)editButton:(UIBarButtonItem *)sender {
+- (IBAction)play:(id)sender {
+    
+    NSString *fileDate = [self.nameOfButton stringByAppendingPathExtension:@"caf"];
+        
+    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
+                                                            NSUserDomainMask,   
+                                                            YES);
+    NSString *docPathList = [pathList objectAtIndex:0];
+    NSString *soundFilePath =[docPathList stringByAppendingPathComponent:fileDate];
+    NSURL *newURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    self.fileOfTrack = newURL;
+    [newURL release];
+
+    AVAudioPlayer *player =[[AVAudioPlayer alloc] initWithContentsOfURL:self.fileOfTrack error:nil];
+    
+    [player prepareToPlay];
+    [player play];
 }
 
-- (void)viewDidLoad
-{
-    ManagerSingleton *manager = [ManagerSingleton instance];
-    XEditTableController *controller = [[XEditTableController alloc]
-                                        initWithArray:[manager arrayOfGroups]];
-    self.xcontroller = controller;
-    [controller release];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(reloadTableOfGroup:) 
-                                                 name:keyForNotification 
-                                               object:nil];
-    
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    UIBarButtonItem *edit =[[[UIBarButtonItem alloc] 
-                             initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                             target:self
-                             action:@selector(editing)] autorelease];
-    self.navigationItem.leftBarButtonItem = edit;
-    
-    [self.tableOfGroups setDelegate: self];
-    [self.tableOfGroups setDataSource: self.xcontroller];
-    [super viewDidLoad];
-    [self.selectGroup setTitle:[manager.arrayOfGroups objectAtIndex:0] forState:0];
-    recording = false;
-}
-
-- (IBAction) recordOrStop:(id)sender {
+- (IBAction)recordOrStop:(id)sender {
     if (recording) {
         [self.audioRecorder stop];
         recording = false;
@@ -109,7 +88,7 @@ NSString *const keyForNotification = @"reloadTableOfGroup";
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSString *dateString = [dateFormatter stringFromDate:date];
         NSString *fileDate = [dateString stringByAppendingPathExtension:@"caf"];
-        self.nameOfTrack = dateString;
+        [self.trackNameButton setTitle:dateString forState:0];
         
         NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
                                                                 NSUserDomainMask,   
@@ -135,6 +114,7 @@ NSString *const keyForNotification = @"reloadTableOfGroup";
         [self.voiceButton setTitle: @"Stop" forState: UIControlStateHighlighted];
         recording = true;
     }
+
 }
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
@@ -145,56 +125,59 @@ NSString *const keyForNotification = @"reloadTableOfGroup";
     NSLog(@"fail");
 }
 
-- (void)reloadTableOfGroup:(NSNotification *)notification {
-    [self.tableOfGroups reloadData];    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:keyForNotification object:nil];
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
-- (void)editing {
-    [self.tableOfGroups setEditing:!self.tableOfGroups.editing animated:YES];
+- (void)viewDidLoad
+{
+    ManagerSingleton *manager = [ManagerSingleton instance];
+    [self.trackNameButton setTitle:self.nameOfButton forState:0];
+    [self.groupNameButton setTitle:[manager searchGroupThoseTrackBelongRo:self.nameOfButton] forState:0];
+    [super viewDidLoad];
+    
+    recording = false;
+	// Do any additional setup after loading the view.
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"GroupViewControllerSegue"]) {
-        GroupViewController *groupViewController = [segue destinationViewController];
-        groupViewController.groupDelegate = self;
+        GroupViewController *groupViewControler = [segue destinationViewController];
+        groupViewControler.groupDelegate = self;
     }
-    if ([[segue identifier] isEqualToString:@"TrackViewControllerSegue"]) {
-        ManagerSingleton *manager = [ManagerSingleton instance];
-        TrackViewController *trackViewController = [segue destinationViewController];
-        trackViewController.arrayOfTracks =  [manager getAllTracksOfTheGroup:sender];
+    if ([[segue identifier] isEqualToString:@"AdditionTrackSegue"]) {
+        AdditionTrackViewController *addTrack = [segue destinationViewController];
+        addTrack.trackDelegate = self;
     }
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"TrackViewControllerSegue" sender:cell.textLabel.text];
+- (void)setNewNameOfTrack:(NSString *)name {
+    [self.trackNameButton setTitle:name forState:0];
 }
 
 - (void)viewDidUnload {
-    [self setTableOfGroups:nil];
-    [self setSelectGroup:nil];
+    
+    [self setTrackNameButton:nil];
+    [self setGroupNameButton:nil];
     [self setVoiceButton:nil];
     [super viewDidUnload];
+    // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-- (void)setNewNameOnButton:(NSString *)name {
-    [self.selectGroup setTitle:name forState:0];
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)dealloc {
-    [audioRecorder release];
     [fileOfTrack release];
-    [nameOfTrack release];
-    [xcontroller release];
-    [tableOfGroups release];
-    [selectGroup release];
+    [trackNameButton release];
+    [groupNameButton release];
     [voiceButton release];
-    [super dealloc];
+        [super dealloc];
 }
 @end
-

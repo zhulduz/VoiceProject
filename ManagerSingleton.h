@@ -22,21 +22,23 @@
 
 - (NSString *)documentPath:(NSString *)file_name;
 
-- (void)addGroup:(NSMutableString *)nameOfGroup;
+- (void)addGroup:(NSString *)nameOfGroup;
 
-- (void)addtrack:(NSMutableString *)nameOfTrack AtGroup:(NSMutableString *)nameOfGroup;
+- (void)addtrack:(NSString *)nameOfTrack AtGroup:(NSString *)nameOfGroup;
 
-- (NSMutableString *)searchGroupWithName:(NSMutableString *)nameOfGroup;
+- (NSString *)searchGroupWithName:(NSString *)nameOfGroup;
 
-- (void)renameGroup:(NSMutableString *)oldNameOfGroup ToNewGroup:(NSMutableString *)newNameGroup;
+- (void)renameGroup:(NSString *)oldNameOfGroup ToNewGroup:(NSString *)newNameGroup;
 
-- (void)renameTrack:(NSMutableString *)oldNameOfTrack ToNewGroup:(NSMutableString *)newNameTrack;
+- (void)renameTrack:(NSString *)oldNameOfTrack ToNewGroup:(NSString *)newNameTrack;
 
-- (NSMutableArray *)getAllTracksOfTheGroup:(NSMutableString *)nameOfGroup;
+- (NSMutableArray *)getAllTracksOfTheGroup:(NSString *)nameOfGroup;
 
-- (void)deleteGroup:(NSMutableString *)nameOfGroup;
+- (void)deleteGroup:(NSString *)nameOfGroup;
 
-- (void)deleteTrack:(NSMutableString *)nameOfTrack;
+- (void)deleteTrack:(NSString *)nameOfTrack;
+
+- (NSString *)searchGroupThoseTrackBelongRo:(NSString *)nameOfTrack;
 
 - (void)saveData;
 

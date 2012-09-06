@@ -79,13 +79,13 @@
     
 }
 
-- (void)addGroup:(NSMutableString *)nameOfGroup {
+- (void)addGroup:(NSString *)nameOfGroup {
     [self.arrayOfGroups addObject:nameOfGroup];
 }
 
 
-- (void)addtrack:(NSMutableString *)nameOfTrack AtGroup:(NSMutableString *)nameOfGroup {
-    NSMutableString *findGroup = [self searchGroupWithName:nameOfGroup];
+- (void)addtrack:(NSString *)nameOfTrack AtGroup:(NSString *)nameOfGroup {
+    NSString *findGroup = [self searchGroupWithName:nameOfGroup];
     if (findGroup == nil) {
         [self addGroup:nameOfGroup];
     }
@@ -94,7 +94,7 @@
     [self.arrayOfTracks addObject:trackSign];
 }
 
-- (NSMutableString *)searchGroupWithName:(NSMutableString *)nameOfGroup {
+- (NSString *)searchGroupWithName:(NSString *)nameOfGroup {
     for (int i = 0; i < [self.arrayOfGroups count]; ++i) {
         if ([[self.arrayOfGroups objectAtIndex:i] isEqual:nameOfGroup]) {
             return [self.arrayOfGroups objectAtIndex:i];
@@ -103,15 +103,16 @@
     return nil;
 }
 
-- (void)renameGroup:(NSMutableString *)oldNameOfGroup ToNewGroup:(NSMutableString *)newNameGroup {
+- (void)renameGroup:(NSString *)oldNameOfGroup ToNewGroup:(NSString *)newNameGroup {
     for (int i = 0; i < [self.arrayOfGroups count]; ++i) {
         if ([[self.arrayOfGroups objectAtIndex:i] isEqual:oldNameOfGroup]) {
             [[self.arrayOfGroups objectAtIndex:i] setString:newNameGroup];
+            [oldNameOfGroup release];
         }
     }
 }
 
-- (void)renameTrack:(NSMutableString *)oldNameOfTrack ToNewGroup:(NSMutableString *)newNameTrack {
+- (void)renameTrack:(NSString *)oldNameOfTrack ToNewGroup:(NSString *)newNameTrack {
     for (int i = 0; i < [self.arrayOfTracks count]; ++i) {
         if ([[[self.arrayOfTracks objectAtIndex:i] valueForKey:@"nameOfTrack"] isEqual:oldNameOfTrack]) {
             [[self.arrayOfTracks objectAtIndex:i] setValue:newNameTrack forKeyPath:@"nameOfTrack"];
@@ -119,7 +120,7 @@
     }
 }
 
-- (NSMutableArray *)getAllTracksOfTheGroup:(NSMutableString *)nameOfGroup {
+- (NSArray *)getAllTracksOfTheGroup:(NSString *)nameOfGroup {
     NSMutableArray *arrayOfTracksAtTheGroup = [[NSMutableArray alloc] initWithCapacity:1];
     for (int i = 0; i < [self.arrayOfTracks count]; ++i) {
         if ([[[self.arrayOfTracks objectAtIndex:i] valueForKey:@"nameOfGroup"] isEqual:nameOfGroup]) {
@@ -129,18 +130,27 @@
     return [arrayOfTracksAtTheGroup autorelease];
 }
 
-- (void)deleteGroup:(NSMutableString *)nameOfGroup {
+- (void)deleteGroup:(NSString *)nameOfGroup {
     if ([self searchGroupWithName:nameOfGroup] != nil) {
         [self.arrayOfGroups removeObject:nameOfGroup];
     }
 }
 
-- (void)deleteTrack:(NSMutableString *)nameOfTrack {
+- (void)deleteTrack:(NSString *)nameOfTrack {
     for (int i = 0; i < [self.arrayOfTracks count]; ++i) {
         if ([[[self.arrayOfTracks objectAtIndex:i] valueForKey:@"nameOfTrack"] isEqual:nameOfTrack]) {
             [self.arrayOfTracks removeObject:[self.arrayOfTracks objectAtIndex:i]];
         }
     }
+}
+
+- (NSString *)searchGroupThoseTrackBelongRo:(NSString *)nameOfTrack {
+    for (int i = 0; i < [self.arrayOfTracks count]; ++i) {
+        if ([[[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfTrack"] isEqualToString:nameOfTrack]) {
+            return [[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfGroup"];
+        }
+    }
+    return nil;
 }
 
 - (void)saveData {
