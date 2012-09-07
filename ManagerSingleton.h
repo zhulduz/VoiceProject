@@ -18,7 +18,7 @@
 
 - (id)init;
 
-- (NSMutableArray *)readFromFile:(NSString *)fileName;
+- (NSArray *)readFromFile:(NSString *)fileName;
 
 - (NSString *)documentPath:(NSString *)file_name;
 

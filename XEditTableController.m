@@ -58,10 +58,16 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         ManagerSingleton *manager = [ManagerSingleton instance];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [manager deleteGroup:cell.textLabel.text];
+        [manager saveData];
+        NSLog(@"text %@", cell.textLabel.text);
+        NSLog(@"Array: %@", self.arrayOfData);
+        NSLog(@"ind %d", indexPath.row);
         [self.arrayOfData removeObjectAtIndex:indexPath.row];
+        
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
                          withRowAnimation:UITableViewRowAnimationFade];
-        [manager saveData];
     }
 }
 

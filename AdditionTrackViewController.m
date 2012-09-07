@@ -16,14 +16,14 @@
 @end
 
 @implementation AdditionTrackViewController {
-    id <RenameTrack> trackDelegate;
+    id<RenameTrack> trackDelegate;
 }
 
 @synthesize trackDelegate;
 @synthesize additionalTrack;
 
 - (IBAction)addTrack:(id)sender {
-    if (self.additionalTrack) {
+    if (self.additionalTrack.text) {
         if ((self.trackDelegate != nil) && [self.trackDelegate respondsToSelector:@selector(setNewNameOfTrack:)]) {
             [self.trackDelegate performSelector:@selector(setNewNameOfTrack:) withObject:self.additionalTrack.text];
         }

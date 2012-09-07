@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "GroupViewController.h"
 
-extern NSString *const keyForNotification;
+extern NSString *const keyForNotificationAddGroup;
 
 @interface MainViewController : UIViewController<RenameButton, UITableViewDelegate, AVAudioPlayerDelegate, AVAudioRecorderDelegate>
  

@@ -27,7 +27,6 @@
 		EC87DBF215ECB83100121F85 /* ManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = EC87DBF115ECB83100121F85 /* ManagerSingleton.m */; };
 		EC88281A15F49B4E00237DAF /* AdditionGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC88281915F49B4E00237DAF /* AdditionGroupViewController.m */; };
 		EC9272F515F5C2C7006BDB51 /* XEditTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9272F415F5C2C7006BDB51 /* XEditTableController.m */; };
-		EC9272F815F5F64D006BDB51 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9272F715F5F64D006BDB51 /* RecordViewController.m */; };
 		ECAC769E15F8BE7E009A8A8A /* AdditionTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAC769D15F8BE7E009A8A8A /* AdditionTrackViewController.m */; };
 		ECD34D5915F7241000671AA0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD34D5815F7241000671AA0 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -76,8 +75,6 @@
 		EC88281915F49B4E00237DAF /* AdditionGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdditionGroupViewController.m; path = ../AdditionGroupViewController.m; sourceTree = "<group>"; };
 		EC9272F315F5C2C7006BDB51 /* XEditTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XEditTableController.h; path = ../XEditTableController.h; sourceTree = "<group>"; };
 		EC9272F415F5C2C7006BDB51 /* XEditTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XEditTableController.m; path = ../XEditTableController.m; sourceTree = "<group>"; };
-		EC9272F615F5F64D006BDB51 /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
-		EC9272F715F5F64D006BDB51 /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
 		ECAC769C15F8BE7E009A8A8A /* AdditionTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdditionTrackViewController.h; path = ../AdditionTrackViewController.h; sourceTree = "<group>"; };
 		ECAC769D15F8BE7E009A8A8A /* AdditionTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdditionTrackViewController.m; path = ../AdditionTrackViewController.m; sourceTree = "<group>"; };
 		ECD34D5815F7241000671AA0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -159,8 +156,6 @@
 				EC7D2E0B15E7634A008A7257 /* GroupViewController.h */,
 				EC7D2E0C15E7634A008A7257 /* GroupViewController.m */,
 				EC7D2DE815E74C35008A7257 /* MainStoryboard.storyboard */,
-				EC9272F615F5F64D006BDB51 /* RecordViewController.h */,
-				EC9272F715F5F64D006BDB51 /* RecordViewController.m */,
 				EC7D2DEB15E74C35008A7257 /* MainViewController.h */,
 				EC7D2DEC15E74C35008A7257 /* MainViewController.m */,
 				EC87DBF015ECB83100121F85 /* ManagerSingleton.h */,
@@ -315,7 +310,6 @@
 				EC87DBF215ECB83100121F85 /* ManagerSingleton.m in Sources */,
 				EC88281A15F49B4E00237DAF /* AdditionGroupViewController.m in Sources */,
 				EC9272F515F5C2C7006BDB51 /* XEditTableController.m in Sources */,
-				EC9272F815F5F64D006BDB51 /* RecordViewController.m in Sources */,
 				EC8789FA15F8A2F300C30178 /* TrackEditViewController.m in Sources */,
 				ECAC769E15F8BE7E009A8A8A /* AdditionTrackViewController.m in Sources */,
 			);

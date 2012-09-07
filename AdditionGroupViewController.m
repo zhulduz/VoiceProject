@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 
 @interface AdditionGroupViewController ()
+
 @property (retain, nonatomic) IBOutlet UITextField *additionalGroup;
 
 @end
@@ -25,11 +26,10 @@
         [manager.arrayOfGroups addObject:self.additionalGroup.text];
         [manager saveData];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotificationAddGroup object:nil];    
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -37,22 +37,19 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
 
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setAdditionalGroup:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 

@@ -11,8 +11,8 @@
 #import "GroupViewController.h"
 #import "AdditionTrackViewController.h"
 
-@interface TrackEditViewController : UIViewController<RenameTrack, RenameButton, AVAudioPlayerDelegate>
+@interface TrackEditViewController : UIViewController<RenameTrack, RenameButton, AVAudioRecorderDelegate>
 
-@property (retain, nonatomic) NSString *nameOfButton;
+@property (retain, nonatomic) NSString *nameOfTrackButton;
 
 @end

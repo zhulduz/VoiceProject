@@ -38,10 +38,14 @@
                                     initWithArray:self.arrayOfTracks];
     self.xcontroller = controller;
     [controller release];
+    
+    //create table of tracks
     [self.tableOfTracks setDelegate: self];
     [self.tableOfTracks setDataSource: self.xcontroller];
     [self setTableOfTracks:nil];
     [super viewDidLoad];
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(reloadTableOfTrack:) 
                                                  name:@"reloadTableOfTrack" 
@@ -56,7 +60,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"TrackEditViewControllerSegue"]) {
         TrackEditViewController *trackEditViewController = [segue destinationViewController];
-        trackEditViewController.nameOfButton = sender;
+        trackEditViewController.nameOfTrackButton = sender;
     }
 }
 

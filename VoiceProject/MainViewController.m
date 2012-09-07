@@ -24,7 +24,6 @@
 
 
 - (IBAction)recordOrStop:(id)sender;
-//- (IBAction)play;
 
 @end
 
@@ -33,8 +32,7 @@
     BOOL recording;
 }
 
-
-NSString *const keyForNotification = @"reloadTableOfGroup";
+NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
 
 @synthesize xcontroller;
 @synthesize tableOfGroups;
@@ -46,10 +44,11 @@ NSString *const keyForNotification = @"reloadTableOfGroup";
 
 - (IBAction)plusButton:(id)sender {
 }
+
 - (IBAction)addTrackButton:(id)sender {
     ManagerSingleton *manager = [ManagerSingleton instance];
     if (self.fileOfTrack) {
-        [manager addtrack:self.nameOfTrack AtGroup:self.selectGroup.titleLabel.text];
+        [manager addtrack:(self.nameOfTrack) AtGroup:(self.selectGroup.titleLabel.text)];
         [manager saveData];
     }
 }
@@ -61,27 +60,33 @@ NSString *const keyForNotification = @"reloadTableOfGroup";
 {
     ManagerSingleton *manager = [ManagerSingleton instance];
     XEditTableController *controller = [[XEditTableController alloc]
-                                        initWithArray:[manager arrayOfGroups]];
+                                        initWithArray:manager.arrayOfGroups];
     self.xcontroller = controller;
     [controller release];
     
+    //notification for reload table of group
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(reloadTableOfGroup:) 
-                                                 name:keyForNotification 
+                                                 name:keyForNotificationAddGroup
                                                object:nil];
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    //button for editing mode
     UIBarButtonItem *edit =[[[UIBarButtonItem alloc] 
                              initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                             target:self
-                             action:@selector(editing)] autorelease];
+                                                  target:self
+                                                  action:@selector(editing)] autorelease];
     self.navigationItem.leftBarButtonItem = edit;
     
+    //create table
     [self.tableOfGroups setDelegate: self];
     [self.tableOfGroups setDataSource: self.xcontroller];
     [super viewDidLoad];
     [self.selectGroup setTitle:[manager.arrayOfGroups objectAtIndex:0] forState:0];
+    
+    //instance for recordering mode
     recording = false;
+    
+    self.tableOfGroups.separatorColor = [UIColor grayColor];
 }
 
 - (IBAction) recordOrStop:(id)sender {
@@ -147,7 +152,7 @@ NSString *const keyForNotification = @"reloadTableOfGroup";
 
 - (void)reloadTableOfGroup:(NSNotification *)notification {
     [self.tableOfGroups reloadData];    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:keyForNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:keyForNotificationAddGroup object:nil];
 }
 
 - (void)editing {

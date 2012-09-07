@@ -41,6 +41,8 @@
                                  initWithArray:manager.arrayOfGroups];
     self.xcontroller = controller;
     [controller release];
+    
+    //create table of group
     [self.tableOfGroups setDelegate: self];
     [self.tableOfGroups setDataSource: self.xcontroller];
 }

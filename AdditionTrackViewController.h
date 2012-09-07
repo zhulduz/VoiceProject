@@ -16,6 +16,6 @@
 
 @interface AdditionTrackViewController : UIViewController
 
-@property (nonatomic, assign) id <RenameTrack> trackDelegate;
+@property (nonatomic, assign) id<RenameTrack> trackDelegate;
 
 @end

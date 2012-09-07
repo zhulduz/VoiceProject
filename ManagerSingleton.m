@@ -31,11 +31,11 @@
 - (id)init {
     if ((self = [super init])) {
         //reading from file
-        self.arrayOfGroups = [self readFromFile:@"1.txt"];
+        self.arrayOfGroups = [[self readFromFile:@"1.txt"] mutableCopy];
         if (self.arrayOfGroups == nil) {
             self.arrayOfGroups = [[NSMutableArray alloc] initWithObjects:@"group0", nil];
         }
-        self.arrayOfTracks = [self readFromFile:@"2.txt"];
+        self.arrayOfTracks = [[self readFromFile:@"2.txt"] mutableCopy];
         if (self.arrayOfTracks == nil) {
             self.arrayOfTracks = [[NSMutableArray alloc] initWithCapacity:1];
         }
@@ -43,7 +43,7 @@
     return self;
 }
 
-- (NSMutableArray *)readFromFile:(NSString *)fileName {
+- (NSArray *)readFromFile:(NSString *)fileName {
     NSFileManager * fmanager = [NSFileManager defaultManager];
     if (![fmanager fileExistsAtPath:[self documentPath:fileName]]) {
         return nil;
@@ -54,12 +54,11 @@
         return nil;
     } else {
         if ([fileName isEqualToString:@"1.txt"]) {
-            return [[stringOfData componentsSeparatedByString:@" "] autorelease];
+            return [stringOfData componentsSeparatedByString:@" "];
         } else {
-            NSMutableArray *arrayOfElemOfStringOfData = [stringOfData componentsSeparatedByString:@"\n"];
+            NSArray *arrayOfElemOfStringOfData = [stringOfData componentsSeparatedByString:@"\n"];
             NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:1];
-            [arrayOfElemOfStringOfData removeLastObject];
-            for (int i = 0; i < [arrayOfElemOfStringOfData count]; ++i) {
+            for (int i = 0; i < [arrayOfElemOfStringOfData count] - 1; ++i) {
                 NSMutableDictionary *elem = [[NSMutableDictionary alloc] initWithCapacity:1];
                 [elem setObject:[[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:0]forKey:@"nameOfGroup"];
                 [elem setObject:[[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:1]forKey:@"nameOfTrack"];
@@ -70,13 +69,9 @@
     }
 }
 
-- (NSString *)documentPath:(NSString *)file_name
-{
-    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
-                                                            NSUserDomainMask,   
-                                                            YES);
+- (NSString *)documentPath:(NSString *)file_name {
+    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return [[pathList objectAtIndex:0] stringByAppendingPathComponent:file_name];
-    
 }
 
 - (void)addGroup:(NSString *)nameOfGroup {
@@ -107,7 +102,6 @@
     for (int i = 0; i < [self.arrayOfGroups count]; ++i) {
         if ([[self.arrayOfGroups objectAtIndex:i] isEqual:oldNameOfGroup]) {
             [[self.arrayOfGroups objectAtIndex:i] setString:newNameGroup];
-            [oldNameOfGroup release];
         }
     }
 }
@@ -133,6 +127,11 @@
 - (void)deleteGroup:(NSString *)nameOfGroup {
     if ([self searchGroupWithName:nameOfGroup] != nil) {
         [self.arrayOfGroups removeObject:nameOfGroup];
+    }
+    for (int i = 0; i < [self.arrayOfTracks count]; ++i) {
+        if ([[[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfGroup"] isEqualToString:nameOfGroup]) {
+            [self.arrayOfTracks removeObjectAtIndex:i];
+        }
     }
 }
 

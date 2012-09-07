@@ -16,6 +16,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *voiceButton;
 
 @property (retain,nonatomic) AVAudioRecorder *audioRecorder;
+@property (retain,nonatomic) AVAudioPlayer *audioPlayer;
 @property (retain, nonatomic) NSURL *fileOfTrack;
 
 
@@ -31,14 +32,15 @@
 @synthesize groupNameButton;
 @synthesize voiceButton;
 @synthesize trackNameButton;
-@synthesize nameOfButton;
+@synthesize nameOfTrackButton;
 @synthesize audioRecorder;
+@synthesize audioPlayer;
 @synthesize fileOfTrack;
 
 - (IBAction)saveChanges:(id)sender {
-    if (self.trackNameButton && self.groupNameButton) {
+    if (self.trackNameButton.titleLabel.text && self.groupNameButton.titleLabel.text) {
         ManagerSingleton *manager = [ManagerSingleton instance];
-        [manager renameTrack:self.nameOfButton ToNewGroup:self.trackNameButton.titleLabel.text];
+        [manager renameTrack:self.nameOfTrackButton ToNewGroup:self.trackNameButton.titleLabel.text];
         [manager saveData];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTableOfTrack" object:nil];
@@ -46,7 +48,7 @@
 
 - (IBAction)play:(id)sender {
     
-    NSString *fileDate = [self.nameOfButton stringByAppendingPathExtension:@"caf"];
+    NSString *fileDate = [self.trackNameButton.titleLabel.text stringByAppendingPathExtension:@"caf"];
         
     NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
                                                             NSUserDomainMask,   
@@ -58,9 +60,11 @@
     [newURL release];
 
     AVAudioPlayer *player =[[AVAudioPlayer alloc] initWithContentsOfURL:self.fileOfTrack error:nil];
-    
-    [player prepareToPlay];
-    [player play];
+    self.audioPlayer = player;
+    [player release];
+
+    [self.audioPlayer prepareToPlay];
+    [self.audioPlayer play];
 }
 
 - (IBAction)recordOrStop:(id)sender {
@@ -137,8 +141,8 @@
 - (void)viewDidLoad
 {
     ManagerSingleton *manager = [ManagerSingleton instance];
-    [self.trackNameButton setTitle:self.nameOfButton forState:0];
-    [self.groupNameButton setTitle:[manager searchGroupThoseTrackBelongRo:self.nameOfButton] forState:0];
+    [self.trackNameButton setTitle:self.nameOfTrackButton forState:0];
+    [self.groupNameButton setTitle:[manager searchGroupThoseTrackBelongRo:self.nameOfTrackButton] forState:0];
     [super viewDidLoad];
     
     recording = false;
@@ -157,6 +161,10 @@
 }
 - (void)setNewNameOfTrack:(NSString *)name {
     [self.trackNameButton setTitle:name forState:0];
+}
+
+- (void)setNewNameOnButton:(NSString *)name {
+    [self.groupNameButton setTitle:name forState:0];
 }
 
 - (void)viewDidUnload {
@@ -178,6 +186,6 @@
     [trackNameButton release];
     [groupNameButton release];
     [voiceButton release];
-        [super dealloc];
+    [super dealloc];
 }
 @end
