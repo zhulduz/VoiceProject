@@ -31,13 +31,13 @@
 - (id)init {
     if ((self = [super init])) {
         //reading from file
-        self.arrayOfGroups = [[self readFromFile:@"1.txt"] mutableCopy];
+        self.arrayOfGroups = [[[self readFromFile:@"1.txt"] mutableCopy] autorelease];
         if (self.arrayOfGroups == nil) {
-            self.arrayOfGroups = [[NSMutableArray alloc] initWithObjects:@"group0", nil];
+            self.arrayOfGroups = [NSMutableArray arrayWithObject:@"group0"];
         }
-        self.arrayOfTracks = [[self readFromFile:@"2.txt"] mutableCopy];
+        self.arrayOfTracks = [[[self readFromFile:@"2.txt"] mutableCopy] autorelease];
         if (self.arrayOfTracks == nil) {
-            self.arrayOfTracks = [[NSMutableArray alloc] initWithCapacity:1];
+            self.arrayOfTracks = [NSMutableArray arrayWithCapacity:1];
         }
     }
     return self;
@@ -49,7 +49,7 @@
         return nil;
     }
     NSData *data = [fmanager contentsAtPath:[self documentPath:fileName]];
-    NSString *stringOfData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *stringOfData = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
     if (!stringOfData) {
         return nil;
     } else {
@@ -57,14 +57,14 @@
             return [stringOfData componentsSeparatedByString:@" "];
         } else {
             NSArray *arrayOfElemOfStringOfData = [stringOfData componentsSeparatedByString:@"\n"];
-            NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:1];
+            NSMutableArray *result = [NSMutableArray arrayWithCapacity:1];
             for (int i = 0; i < [arrayOfElemOfStringOfData count] - 1; ++i) {
-                NSMutableDictionary *elem = [[NSMutableDictionary alloc] initWithCapacity:1];
+                NSMutableDictionary *elem = [[[NSMutableDictionary alloc] initWithCapacity:1] autorelease];
                 [elem setObject:[[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:0]forKey:@"nameOfGroup"];
                 [elem setObject:[[[arrayOfElemOfStringOfData objectAtIndex:i] componentsSeparatedByString:@" "] objectAtIndex:1]forKey:@"nameOfTrack"];
                 [result addObject:elem];
             }
-            return [result autorelease];
+            return result;
         }
     }
 }
@@ -84,8 +84,7 @@
     if (findGroup == nil) {
         [self addGroup:nameOfGroup];
     }
-    NSMutableDictionary *trackSign = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:nameOfTrack, nameOfGroup, nil] 
-                                                                          forKeys:[NSArray arrayWithObjects:@"nameOfTrack",@"nameOfGroup", nil]];
+    NSMutableDictionary *trackSign = [NSMutableDictionary dictionaryWithObject:[NSArray arrayWithObjects:nameOfTrack, nameOfGroup, nil] forKey:[NSArray arrayWithObjects:@"nameOfTrack",@"nameOfGroup", nil]];
     [self.arrayOfTracks addObject:trackSign];
 }
 
