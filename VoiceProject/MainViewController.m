@@ -48,7 +48,7 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
 - (IBAction)addTrackButton:(id)sender {
     ManagerSingleton *manager = [ManagerSingleton instance];
     if (self.fileOfTrack) {
-        [manager addtrack:(self.nameOfTrack) AtGroup:(self.selectGroup.titleLabel.text)];
+        [manager addTrack:(self.nameOfTrack) AtGroup:(self.selectGroup.titleLabel.text)];
         [manager saveData];
     }
 }
@@ -63,6 +63,10 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
                                         initWithArray:manager.arrayOfGroups];
     self.xcontroller = controller;
     [controller release];
+    /*for (int i = 0; i < [manager.arrayOfTracks count]; ++i) {
+        [manager.arrayOfTracks removeObjectAtIndex:i];
+    }*/
+    [manager saveData];
     
     //notification for reload table of group
     [[NSNotificationCenter defaultCenter] addObserver:self 

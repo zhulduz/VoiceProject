@@ -21,6 +21,8 @@
 
 @implementation TrackViewController
 
+NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
+
 @synthesize xcontroller;
 @synthesize tableOfTracks;
 @synthesize arrayOfTracks;
@@ -48,13 +50,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(reloadTableOfTrack:) 
-                                                 name:@"reloadTableOfTrack" 
+                                                 name:keyForNotificationRenameTrack
                                                object:nil];
 }
 
 - (void)reloadTableOfTrack:(NSNotification *)notification {
     [self.tableOfTracks reloadData];    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadTableOfTrack" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:keyForNotificationRenameTrack object:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

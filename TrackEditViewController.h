@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "GroupViewController.h"
 #import "AdditionTrackViewController.h"
+#import "TrackViewController.h"
 
 @interface TrackEditViewController : UIViewController<RenameTrack, RenameButton, AVAudioRecorderDelegate>
 

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *const keyForNotificationRenameTrack;
+
 @interface TrackViewController : UIViewController<UITableViewDelegate>
 
 @property (retain, nonatomic) NSMutableArray *arrayOfTracks;

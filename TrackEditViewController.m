@@ -38,12 +38,12 @@
 @synthesize fileOfTrack;
 
 - (IBAction)saveChanges:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotificationRenameTrack object:nil];
     if (self.trackNameButton.titleLabel.text && self.groupNameButton.titleLabel.text) {
         ManagerSingleton *manager = [ManagerSingleton instance];
         [manager renameTrack:self.nameOfTrackButton ToNewGroup:self.trackNameButton.titleLabel.text];
         [manager saveData];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTableOfTrack" object:nil];
 }
 
 - (IBAction)play:(id)sender {
@@ -160,7 +160,35 @@
     }
 }
 - (void)setNewNameOfTrack:(NSString *)name {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *oldNameOfTrack = [self.trackNameButton.titleLabel.text stringByAppendingPathExtension:@"caf"];
+    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
+                                                            NSUserDomainMask,   
+                                                            YES);
+    NSString *docPathList = [pathList objectAtIndex:0];
+    NSString *soundFilePath =[docPathList stringByAppendingPathComponent:oldNameOfTrack];
+    NSURL *newURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    self.fileOfTrack = newURL;
+       
+    NSString *newNameOfTrack = [name stringByAppendingPathExtension:@"caf"];
+    NSString *soundNewFilePath =[docPathList stringByAppendingPathComponent:newNameOfTrack];
+    newURL = [[NSURL alloc] initFileURLWithPath: soundNewFilePath];
+    
+    [fileManager moveItemAtURL:self.fileOfTrack toURL:newURL error:nil];
+    self.fileOfTrack = newURL;
+    [newURL release];
+    NSLog(@"track: %@", self.fileOfTrack);
     [self.trackNameButton setTitle:name forState:0];
+    
+}
+
+- (int)getFile:(NSString *)path {
+    for (int i = [path length] - 1; i > 0; --i) {
+        if ([path characterAtIndex:i] == '/') {
+            return (i+1);
+        }
+    }
+    return 0;
 }
 
 - (void)setNewNameOnButton:(NSString *)name {

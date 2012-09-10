@@ -30,33 +30,29 @@
 
 - (id)init {
     if ((self = [super init])) {
-        //reading from file
-        self.arrayOfGroups = [[[self readFromFile:@"1.txt"] mutableCopy] autorelease];
+        self.arrayOfGroups = [self readFromFile:@"1.txt"];
         if (self.arrayOfGroups == nil) {
             self.arrayOfGroups = [NSMutableArray arrayWithObject:@"group0"];
         }
-        self.arrayOfTracks = [[[self readFromFile:@"2.txt"] mutableCopy] autorelease];
-        if (self.arrayOfTracks == nil) {
-            self.arrayOfTracks = [NSMutableArray arrayWithCapacity:1];
-        }
+        self.arrayOfTracks = [self readFromFile:@"2.txt"];
     }
     return self;
 }
 
-- (NSArray *)readFromFile:(NSString *)fileName {
+- (NSMutableArray *)readFromFile:(NSString *)fileName {
     NSFileManager * fmanager = [NSFileManager defaultManager];
     if (![fmanager fileExistsAtPath:[self documentPath:fileName]]) {
         return nil;
     }
     NSData *data = [fmanager contentsAtPath:[self documentPath:fileName]];
-    NSString *stringOfData = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-    if (!stringOfData) {
+    NSMutableString *stringOfData = [[[NSMutableString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+    if ([stringOfData length] == 0) {
         return nil;
     } else {
         if ([fileName isEqualToString:@"1.txt"]) {
-            return [stringOfData componentsSeparatedByString:@" "];
+            return [[[stringOfData componentsSeparatedByString:@" "] mutableCopy] autorelease];
         } else {
-            NSArray *arrayOfElemOfStringOfData = [stringOfData componentsSeparatedByString:@"\n"];
+            NSMutableArray *arrayOfElemOfStringOfData = [[[stringOfData componentsSeparatedByString:@"\n"] mutableCopy] autorelease];
             NSMutableArray *result = [NSMutableArray arrayWithCapacity:1];
             for (int i = 0; i < [arrayOfElemOfStringOfData count] - 1; ++i) {
                 NSMutableDictionary *elem = [[[NSMutableDictionary alloc] initWithCapacity:1] autorelease];
@@ -78,14 +74,18 @@
     [self.arrayOfGroups addObject:nameOfGroup];
 }
 
-
-- (void)addtrack:(NSString *)nameOfTrack AtGroup:(NSString *)nameOfGroup {
+- (void)addTrack:(NSString *)nameOfTrack AtGroup:(NSString *)nameOfGroup {
     NSString *findGroup = [self searchGroupWithName:nameOfGroup];
     if (findGroup == nil) {
         [self addGroup:nameOfGroup];
     }
-    NSMutableDictionary *trackSign = [NSMutableDictionary dictionaryWithObject:[NSArray arrayWithObjects:nameOfTrack, nameOfGroup, nil] forKey:[NSArray arrayWithObjects:@"nameOfTrack",@"nameOfGroup", nil]];
-    [self.arrayOfTracks addObject:trackSign];
+    NSMutableDictionary *trackSign = [[[NSMutableDictionary alloc]initWithObjects:[NSArray arrayWithObjects:nameOfGroup, nameOfTrack, nil] forKeys:[NSArray arrayWithObjects:@"nameOfGroup",@"nameOfTrack", nil]] autorelease];
+    if (self.arrayOfTracks) {
+        [self.arrayOfTracks addObject:trackSign];
+    } else {
+        self.arrayOfTracks = [NSMutableArray arrayWithObject:trackSign];
+    }
+   
 }
 
 - (NSString *)searchGroupWithName:(NSString *)nameOfGroup {
@@ -124,12 +124,33 @@
 }
 
 - (void)deleteGroup:(NSString *)nameOfGroup {
+    NSDictionary *recordSettings =[[[NSDictionary alloc] initWithObjectsAndKeys:
+                                   [NSNumber numberWithFloat: 44100.0], AVSampleRateKey,
+                                   [NSNumber numberWithInt: kAudioFormatAppleLossless],  AVFormatIDKey,
+                                   [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
+                                   [NSNumber numberWithInt: AVAudioQualityMax], AVEncoderAudioQualityKey, nil] autorelease];
+   
+    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
+                                                            NSUserDomainMask,   
+                                                            YES);
+    NSString *docPathList = [pathList objectAtIndex:0];
+
     if ([self searchGroupWithName:nameOfGroup] != nil) {
         [self.arrayOfGroups removeObject:nameOfGroup];
     }
     for (int i = 0; i < [self.arrayOfTracks count]; ++i) {
         if ([[[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfGroup"] isEqualToString:nameOfGroup]) {
+            NSString *file = [[[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfTrack"] stringByAppendingPathExtension:@"caf"];
+            NSString *soundFilePath =[docPathList stringByAppendingPathComponent:file];
+            NSURL *newURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+            
+            AVAudioRecorder *recorder =[[[AVAudioRecorder alloc] initWithURL:newURL
+                                                                   settings: recordSettings error: nil] autorelease];
+            [recorder deleteRecording];    
+            
+           // NSLog(@"count : %@", [[self.arrayOfTracks objectAtIndex:i] retainCount]);
             [self.arrayOfTracks removeObjectAtIndex:i];
+            [newURL release];
         }
     }
 }
@@ -140,6 +161,23 @@
             [self.arrayOfTracks removeObject:[self.arrayOfTracks objectAtIndex:i]];
         }
     }
+    NSDictionary *recordSettings =[[[NSDictionary alloc] initWithObjectsAndKeys:
+                                                     [NSNumber numberWithFloat: 44100.0], AVSampleRateKey,
+                                                       [NSNumber numberWithInt: kAudioFormatAppleLossless],  AVFormatIDKey,
+                                                       [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
+                                                       [NSNumber numberWithInt: AVAudioQualityMax], AVEncoderAudioQualityKey, nil] autorelease];
+    NSString *file = [nameOfTrack stringByAppendingPathExtension:@"caf"];
+    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
+                                                            NSUserDomainMask,   
+                                                            YES);
+    NSString *docPathList = [pathList objectAtIndex:0];
+    NSString *soundFilePath =[docPathList stringByAppendingPathComponent:file];
+    NSURL *newURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+   
+    AVAudioRecorder *recorder =[[[AVAudioRecorder alloc] initWithURL:newURL
+                                                              settings: recordSettings error: nil] autorelease];
+    [recorder deleteRecording]; 
+    [newURL release];
 }
 
 - (NSString *)searchGroupThoseTrackBelongRo:(NSString *)nameOfTrack {
@@ -155,18 +193,15 @@
     NSFileManager *fmanager = [NSFileManager defaultManager]; 
     [fmanager createFileAtPath:[self documentPath:@"1.txt"] contents:[[self.arrayOfGroups componentsJoinedByString:@" "] dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
     
-    NSMutableString *fileContent = [[NSMutableString alloc] initWithCapacity:1];
-    NSMutableDictionary *elem = [[NSMutableDictionary alloc] initWithCapacity:1];
+    NSMutableString *fileContent = [NSMutableString string];
     for (int i = 0; i < [self.arrayOfTracks count]; ++i) {
-        ///elem = [self.arrayOfTracks objectAtIndex:i];
-        [fileContent appendString:[[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfGroup"]];
+        [fileContent appendFormat:@"%@", [[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfGroup"]];
         [fileContent appendString:@" "];
-        [fileContent appendString:[[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfTrack"]];
+        [fileContent appendFormat:@"%@", [[self.arrayOfTracks objectAtIndex:i] objectForKey:@"nameOfTrack"]];
         [fileContent appendString:@"\n"];
     }
+    NSLog(@"%@", fileContent);
     [fmanager createFileAtPath:[self documentPath:@"2.txt"] contents:[fileContent dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
-    [elem release];
-    [fileContent release];
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 @interface ManagerSingleton : NSObject
@@ -18,13 +19,13 @@
 
 - (id)init;
 
-- (NSArray *)readFromFile:(NSString *)fileName;
+- (NSMutableArray *)readFromFile:(NSString *)fileName;
 
 - (NSString *)documentPath:(NSString *)file_name;
 
 - (void)addGroup:(NSString *)nameOfGroup;
 
-- (void)addtrack:(NSString *)nameOfTrack AtGroup:(NSString *)nameOfGroup;
+- (void)addTrack:(NSString *)nameOfTrack AtGroup:(NSString *)nameOfGroup;
 
 - (NSString *)searchGroupWithName:(NSString *)nameOfGroup;
 
