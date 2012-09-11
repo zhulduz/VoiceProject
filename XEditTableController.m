@@ -45,7 +45,7 @@
     //If cell was founded
     if (cell == nil) {
         //Creating cells
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                        reuseIdentifier:CellIdentifier] autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }

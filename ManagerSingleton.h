@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
+extern NSString *const keyGroup;
+extern NSString *const keyTrack;
 
 @interface ManagerSingleton : NSObject
 
@@ -19,11 +21,13 @@
 
 - (id)init;
 
-- (NSMutableArray *)readFromFile:(NSString *)fileName;
+- (void)readFromFile:(NSString *)fileName;
 
 - (NSString *)documentPath:(NSString *)file_name;
 
 - (void)addGroup:(NSString *)nameOfGroup;
+
+- (void)removeTrack:(NSString *)nameOfTrack AtNewGroup:(NSString *)nameOfGroup;
 
 - (void)addTrack:(NSString *)nameOfTrack AtGroup:(NSString *)nameOfGroup;
 
@@ -31,13 +35,11 @@
 
 - (void)renameGroup:(NSString *)oldNameOfGroup ToNewGroup:(NSString *)newNameGroup;
 
-- (void)renameTrack:(NSString *)oldNameOfTrack ToNewGroup:(NSString *)newNameTrack;
+- (void)renameTrack:(NSString *)oldNameOfTrack ToNewTrack:(NSString *)newNameTrack;
 
 - (NSMutableArray *)getAllTracksOfTheGroup:(NSString *)nameOfGroup;
 
 - (void)deleteGroup:(NSString *)nameOfGroup;
-
-- (void)deleteTrack:(NSString *)nameOfTrack;
 
 - (NSString *)searchGroupThoseTrackBelongRo:(NSString *)nameOfTrack;
 

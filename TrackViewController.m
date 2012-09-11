@@ -55,8 +55,8 @@ NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
 }
 
 - (void)reloadTableOfTrack:(NSNotification *)notification {
+    
     [self.tableOfTracks reloadData];    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:keyForNotificationRenameTrack object:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -83,6 +83,7 @@ NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:keyForNotificationRenameTrack object:nil];
     [tableOfTracks release];
     [super dealloc];
 }

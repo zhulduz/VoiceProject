@@ -45,14 +45,6 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
 - (IBAction)plusButton:(id)sender {
 }
 
-- (IBAction)addTrackButton:(id)sender {
-    ManagerSingleton *manager = [ManagerSingleton instance];
-    if (self.fileOfTrack) {
-        [manager addTrack:(self.nameOfTrack) AtGroup:(self.selectGroup.titleLabel.text)];
-        [manager saveData];
-    }
-}
-
 - (IBAction)editButton:(UIBarButtonItem *)sender {
 }
 
@@ -63,31 +55,26 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
                                         initWithArray:manager.arrayOfGroups];
     self.xcontroller = controller;
     [controller release];
-    /*for (int i = 0; i < [manager.arrayOfTracks count]; ++i) {
-        [manager.arrayOfTracks removeObjectAtIndex:i];
-    }*/
-    [manager saveData];
-    
-    //notification for reload table of group
+    //Notification for reload table of group
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(reloadTableOfGroup:) 
                                                  name:keyForNotificationAddGroup
                                                object:nil];
     
-    //button for editing mode
+    //Button for editing mode
     UIBarButtonItem *edit =[[[UIBarButtonItem alloc] 
                              initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                   target:self
                                                   action:@selector(editing)] autorelease];
     self.navigationItem.leftBarButtonItem = edit;
     
-    //create table
+    //Creation table
     [self.tableOfGroups setDelegate: self];
     [self.tableOfGroups setDataSource: self.xcontroller];
     [super viewDidLoad];
     [self.selectGroup setTitle:[manager.arrayOfGroups objectAtIndex:0] forState:0];
     
-    //instance for recordering mode
+    //Instance for recordering mode
     recording = false;
     
     self.tableOfGroups.separatorColor = [UIColor grayColor];
@@ -112,7 +99,7 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
                                        [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
                                        [NSNumber numberWithInt: AVAudioQualityMax], AVEncoderAudioQualityKey, nil];
         
-        //create dateFile
+        //Creation dateFile
         NSDate *date = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -129,7 +116,7 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
         self.fileOfTrack = newURL;
         [newURL release];
         
-        //create recprder
+        //Creation recorder
         AVAudioRecorder *newRecorder =[[AVAudioRecorder alloc] initWithURL:self.fileOfTrack 
                                                                   settings: recordSettings error: nil];
         [date release];
@@ -143,6 +130,13 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
         [self.voiceButton setTitle: @"Stop" forState: UIControlStateNormal];
         [self.voiceButton setTitle: @"Stop" forState: UIControlStateHighlighted];
         recording = true;
+        
+        //Saving track
+        ManagerSingleton *manager = [ManagerSingleton instance];
+        if (self.fileOfTrack) {
+            [manager addTrack:(self.nameOfTrack) AtGroup:(self.selectGroup.titleLabel.text)];
+            [manager saveData];
+        }
     }
 }
 
@@ -156,7 +150,6 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
 
 - (void)reloadTableOfGroup:(NSNotification *)notification {
     [self.tableOfGroups reloadData];    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:keyForNotificationAddGroup object:nil];
 }
 
 - (void)editing {
@@ -180,13 +173,6 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
     [self performSegueWithIdentifier:@"TrackViewControllerSegue" sender:cell.textLabel.text];
 }
 
-- (void)viewDidUnload {
-    [self setTableOfGroups:nil];
-    [self setSelectGroup:nil];
-    [self setVoiceButton:nil];
-    [super viewDidUnload];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
@@ -195,7 +181,15 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
     [self.selectGroup setTitle:name forState:0];
 }
 
+- (void)viewDidUnload {
+    [self setTableOfGroups:nil];
+    [self setSelectGroup:nil];
+    [self setVoiceButton:nil];
+    [super viewDidUnload];
+}
+
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:keyForNotificationAddGroup object:nil];
     [audioRecorder release];
     [fileOfTrack release];
     [nameOfTrack release];
