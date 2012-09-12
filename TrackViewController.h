@@ -12,6 +12,6 @@ extern NSString *const keyForNotificationRenameTrack;
 
 @interface TrackViewController : UIViewController<UITableViewDelegate>
 
-@property (retain, nonatomic) NSMutableArray *arrayOfTracks;
+@property (retain, nonatomic) NSString *groupName;
 
 @end

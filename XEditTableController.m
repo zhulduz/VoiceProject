@@ -29,7 +29,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -55,6 +55,7 @@
     return cell;
 }
 
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         ManagerSingleton *manager = [ManagerSingleton instance];
@@ -62,8 +63,6 @@
         [self.arrayOfData removeObjectAtIndex:indexPath.row];
         [manager deleteGroup:cell.textLabel.text];
         [manager saveData];
-     
-        
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
                          withRowAnimation:UITableViewRowAnimationFade];
     }

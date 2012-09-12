@@ -21,12 +21,28 @@
 @synthesize additionalGroup;
 
 - (IBAction)addGroup:(id)sender {
-    if (self.additionalGroup.text) {
+    if ([self.additionalGroup.text length] != 0) {
         ManagerSingleton *manager = [ManagerSingleton instance];
-        [manager.arrayOfGroups addObject:self.additionalGroup.text];
-        [manager saveData];
+        if ([manager isAddGroup:self.additionalGroup.text] == false) {
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" 
+                                                          message:[NSString stringWithFormat:@"Group with name %@ is exist already", self.additionalGroup.text] 
+                                                         delegate:self 
+                                                cancelButtonTitle:@"Close" otherButtonTitles:nil, nil]; 
+            [alert show];
+            [alert release];
+        } else {
+            [manager saveData];
+            [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotificationAddGroup object:nil]; 
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" 
+                                                        message:@"Enter group name to add" 
+                                                       delegate:self 
+                                              cancelButtonTitle:@"Close" otherButtonTitles:nil, nil]; 
+        [alert show];
+        [alert release];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotificationAddGroup object:nil];    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {

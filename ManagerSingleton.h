@@ -25,23 +25,25 @@ extern NSString *const keyTrack;
 
 - (NSString *)documentPath:(NSString *)file_name;
 
-- (void)addGroup:(NSString *)nameOfGroup;
+- (BOOL)isAddGroup:(NSString *)nameOfGroup;
 
-- (void)removeTrack:(NSString *)nameOfTrack AtNewGroup:(NSString *)nameOfGroup;
+- (void)removeTrack:(NSString *)nameOfTrack atNewGroup:(NSString *)nameOfGroup;
 
-- (void)addTrack:(NSString *)nameOfTrack AtGroup:(NSString *)nameOfGroup;
+- (BOOL)isAddTrack:(NSString *)nameOfTrack atGroup:(NSString *)nameOfGroup;
 
 - (NSString *)searchGroupWithName:(NSString *)nameOfGroup;
 
-- (void)renameGroup:(NSString *)oldNameOfGroup ToNewGroup:(NSString *)newNameGroup;
+- (BOOL)searchTrackWithName:(NSString *)nameOfTrack;
 
-- (void)renameTrack:(NSString *)oldNameOfTrack ToNewTrack:(NSString *)newNameTrack;
+- (void)renameGroup:(NSString *)oldNameOfGroup toNewGroup:(NSString *)newNameGroup;
+
+- (BOOL)renameTrack:(NSString *)oldNameOfTrack toNewTrack:(NSString *)newNameTrack;
 
 - (NSMutableArray *)getAllTracksOfTheGroup:(NSString *)nameOfGroup;
 
 - (void)deleteGroup:(NSString *)nameOfGroup;
 
-- (NSString *)searchGroupThoseTrackBelongRo:(NSString *)nameOfTrack;
+- (NSString *)searchGroupThoseTrackBelongTo:(NSString *)nameOfTrack;
 
 - (void)saveData;
 

@@ -14,8 +14,10 @@
 
 @interface TrackViewController ()
 
+@property (retain, nonatomic) NSMutableArray *arrayOfTracks;
 @property (retain, nonatomic) XTableController *xcontroller;
 @property (retain, nonatomic) IBOutlet UITableView *tableOfTracks;
+@property (retain, nonatomic) NSString *nameOfcell;
 
 @end
 
@@ -26,6 +28,8 @@ NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
 @synthesize xcontroller;
 @synthesize tableOfTracks;
 @synthesize arrayOfTracks;
+@synthesize nameOfcell;
+@synthesize groupName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -36,27 +40,27 @@ NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
 }
 
 - (void)viewDidLoad {
+    ManagerSingleton *manager = [ManagerSingleton instance];
+    self.arrayOfTracks = [manager getAllTracksOfTheGroup:self.groupName];
     XTableController *controller = [[XTableController alloc]
-                                    initWithArray:self.arrayOfTracks];
+                                    initWithArray:[manager getAllTracksOfTheGroup:self.groupName]];
     self.xcontroller = controller;
     [controller release];
     
     //create table of tracks
     [self.tableOfTracks setDelegate: self];
     [self.tableOfTracks setDataSource: self.xcontroller];
-    [self setTableOfTracks:nil];
+    
+    //[self setTableOfTracks:nil];
     [super viewDidLoad];
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(reloadTableOfTrack:) 
                                                  name:keyForNotificationRenameTrack
                                                object:nil];
 }
 
-- (void)reloadTableOfTrack:(NSNotification *)notification {
-    
-    [self.tableOfTracks reloadData];    
+- (void)reloadTableOfTrack:(NSNotification *)notification {    
+    [self.tableOfTracks reloadData];  
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -68,17 +72,17 @@ NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    self.nameOfcell = cell.textLabel.text;
     [self performSegueWithIdentifier:@"TrackEditViewControllerSegue" sender:cell.textLabel.text];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
        [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 

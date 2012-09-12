@@ -48,8 +48,7 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
 - (IBAction)editButton:(UIBarButtonItem *)sender {
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     ManagerSingleton *manager = [ManagerSingleton instance];
     XEditTableController *controller = [[XEditTableController alloc]
                                         initWithArray:manager.arrayOfGroups];
@@ -60,13 +59,7 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
                                              selector:@selector(reloadTableOfGroup:) 
                                                  name:keyForNotificationAddGroup
                                                object:nil];
-    
-    //Button for editing mode
-    UIBarButtonItem *edit =[[[UIBarButtonItem alloc] 
-                             initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                  target:self
-                                                  action:@selector(editing)] autorelease];
-    self.navigationItem.leftBarButtonItem = edit;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     //Creation table
     [self.tableOfGroups setDelegate: self];
@@ -134,11 +127,17 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
         //Saving track
         ManagerSingleton *manager = [ManagerSingleton instance];
         if (self.fileOfTrack) {
-            [manager addTrack:(self.nameOfTrack) AtGroup:(self.selectGroup.titleLabel.text)];
+            [manager isAddTrack:(self.nameOfTrack) atGroup:(self.selectGroup.titleLabel.text)];
             [manager saveData];
         }
     }
 }
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    [self.tableOfGroups setEditing:editing animated:animated];
+}
+
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
     NSLog(@"success");
@@ -152,9 +151,6 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
     [self.tableOfGroups reloadData];    
 }
 
-- (void)editing {
-    [self.tableOfGroups setEditing:!self.tableOfGroups.editing animated:YES];
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"GroupViewControllerSegue"]) {
@@ -162,15 +158,15 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
         groupViewController.groupDelegate = self;
     }
     if ([[segue identifier] isEqualToString:@"TrackViewControllerSegue"]) {
-        ManagerSingleton *manager = [ManagerSingleton instance];
         TrackViewController *trackViewController = [segue destinationViewController];
-        trackViewController.arrayOfTracks =  [manager getAllTracksOfTheGroup:sender];
+        trackViewController.groupName = sender;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"TrackViewControllerSegue" sender:cell.textLabel.text];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

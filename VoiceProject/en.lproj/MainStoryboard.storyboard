@@ -112,7 +112,7 @@
             </objects>
             <point key="canvasLocation" x="428" y="1158"/>
         </scene>
-        <!--Track View Controller - List of tracks-->
+        <!--Track View Controller - Tracks-->
         <scene sceneID="ScF-aY-Ps6">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cYW-0U-dfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -129,7 +129,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="List of tracks" id="d5S-Iy-Wdx"/>
+                    <navigationItem key="navigationItem" title="Tracks" id="d5S-Iy-Wdx"/>
                     <connections>
                         <outlet property="tableOfTracks" destination="5Vv-nf-94s" id="1RS-tj-4bX"/>
                         <segue destination="48y-qy-afr" kind="push" identifier="TrackEditViewControllerSegue" id="QOQ-Cx-OAb"/>
@@ -138,7 +138,7 @@
             </objects>
             <point key="canvasLocation" x="939" y="1158"/>
         </scene>
-        <!--Track Edit View Controller - Redefenition track-->
+        <!--Track Edit View Controller - Details-->
         <scene sceneID="xSe-Ta-RNN">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMw-kU-jLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -163,7 +163,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nfr-mt-Sds">
-                                <rect key="frame" x="20" y="91" width="63" height="37"/>
+                                <rect key="frame" x="52" y="87" width="84" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Play">
@@ -174,11 +174,11 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="play:" destination="48y-qy-afr" eventType="touchUpInside" id="zja-Vq-wuQ"/>
+                                    <action selector="play:" destination="48y-qy-afr" eventType="touchUpInside" id="lsC-vt-hNu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="W3Q-1s-Qji">
-                                <rect key="frame" x="164" y="91" width="136" height="37"/>
+                                <rect key="frame" x="92" y="209" width="136" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title=" Rerecord track">
@@ -193,7 +193,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JRa-KS-suc">
-                                <rect key="frame" x="52" y="155" width="206" height="45"/>
+                                <rect key="frame" x="52" y="268" width="206" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -207,20 +207,40 @@
                                     <segue destination="oKe-Vd-Bnb" kind="push" identifier="GroupViewControllerSegue" id="3iw-Md-LNb"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KHG-G9-pQw">
+                                <rect key="frame" x="174" y="87" width="84" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Stop">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopPlay:" destination="48y-qy-afr" eventType="touchUpInside" id="4I9-W1-Jm3"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="Tlr-3V-OzW">
+                                <rect key="frame" x="50" y="152" width="210" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Redefenition track" id="GIo-gZ-raF"/>
+                    <navigationItem key="navigationItem" title="Details" id="GIo-gZ-raF"/>
                     <connections>
+                        <outlet property="aSlider" destination="Tlr-3V-OzW" id="Ubu-Fk-oJf"/>
                         <outlet property="groupNameButton" destination="JRa-KS-suc" id="cOS-FQ-s9P"/>
                         <outlet property="trackNameButton" destination="fYI-HM-SSq" id="cez-5y-FTF"/>
                         <outlet property="voiceButton" destination="W3Q-1s-Qji" id="Z2u-qR-9cT"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="939" y="1750"/>
+            <point key="canvasLocation" x="939" y="1832"/>
         </scene>
-        <!--Addition Track View Controller - Rename track-->
+        <!--Addition Track View Controller - Rename-->
         <scene sceneID="IAb-jR-V0P">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bve-Dg-KS3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -239,7 +259,7 @@
                                 <rect key="frame" x="108" y="64" width="103" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="add track">
+                                <state key="normal" title="rename">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -253,7 +273,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Rename track" id="0Kk-fp-poz"/>
+                    <navigationItem key="navigationItem" title="Rename" id="0Kk-fp-poz"/>
                     <connections>
                         <outlet property="additionalTrack" destination="Bsm-de-OHF" id="4bm-hY-p5R"/>
                     </connections>
@@ -276,7 +296,7 @@
             </objects>
             <point key="canvasLocation" x="-21" y="257"/>
         </scene>
-        <!--Group View Controller - List of groups-->
+        <!--Group View Controller - Groups-->
         <scene sceneID="iov-dZ-kVL">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XTN-6z-EiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -293,7 +313,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="List of groups" id="3cc-iB-ePS"/>
+                    <navigationItem key="navigationItem" title="Groups" id="3cc-iB-ePS"/>
                     <connections>
                         <outlet property="tableOfGroups" destination="WII-dc-Zho" id="orF-X0-sGA"/>
                     </connections>
@@ -335,6 +355,7 @@
             <relationships>
                 <relationship kind="action" name="play:"/>
                 <relationship kind="action" name="recordOrStop:"/>
+                <relationship kind="outlet" name="aSlider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="groupNameButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="trackNameButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="voiceButton" candidateClass="UIButton"/>

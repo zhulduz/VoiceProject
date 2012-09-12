@@ -14,6 +14,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *trackNameButton;
 @property (retain, nonatomic) IBOutlet UIButton *groupNameButton;
 @property (retain, nonatomic) IBOutlet UIButton *voiceButton;
+@property (retain, nonatomic) IBOutlet UISlider *aSlider;
 
 @property (retain,nonatomic) AVAudioRecorder *audioRecorder;
 @property (retain,nonatomic) AVAudioPlayer *audioPlayer;
@@ -27,33 +28,56 @@
 
 @implementation TrackEditViewController {
     BOOL recording;
+    NSTimer *sliderTimer;
 }
 
 @synthesize groupNameButton;
 @synthesize voiceButton;
+@synthesize aSlider;
 @synthesize trackNameButton;
 @synthesize nameOfTrackButton;
 @synthesize audioRecorder;
 @synthesize audioPlayer;
 @synthesize fileOfTrack;
 
-- (IBAction)play:(id)sender {
-    
-    NSString *fileDate = [self.trackNameButton.titleLabel.text stringByAppendingPathExtension:@"caf"];
-        
+- (NSString *)pathForTracks:(NSString *)fileName {
     NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
                                                             NSUserDomainMask,   
                                                             YES);
     NSString *docPathList = [pathList objectAtIndex:0];
-    NSString *soundFilePath =[docPathList stringByAppendingPathComponent:fileDate];
-    NSURL *newURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    NSString *soundFilePath =[docPathList stringByAppendingPathComponent:fileName];
+    return soundFilePath;
+}
+
+- (IBAction)stopPlay:(id)sender {
+    if (self.audioPlayer.playing) {
+        [self.audioPlayer stop];
+    }
+    [sliderTimer invalidate];
+}
+
+- (IBAction)play:(id)sender { 
+    NSString *fileDate = [self.trackNameButton.titleLabel.text stringByAppendingPathExtension:@"caf"];
+    NSURL *newURL = [[NSURL alloc] initFileURLWithPath: [self pathForTracks:fileDate]];
     self.fileOfTrack = newURL;
     [newURL release];
-
     AVAudioPlayer *player =[[AVAudioPlayer alloc] initWithContentsOfURL:self.fileOfTrack error:nil];
+    sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateSlider) userInfo:nil repeats:YES];
+    aSlider.maximumValue = player.duration;
+
     self.audioPlayer = player;
     [player release];
+    [self.audioPlayer prepareToPlay];
+    [self.audioPlayer play];
+}
 
+- (void)updateSlider {
+    aSlider.value = self.audioPlayer.currentTime;
+}
+
+- (IBAction)sliderChanged:(UISlider *)sender {
+    [self.audioPlayer stop];
+    [self.audioPlayer setCurrentTime:aSlider.value];
     [self.audioPlayer prepareToPlay];
     [self.audioPlayer play];
 }
@@ -76,14 +100,10 @@
                                        [NSNumber numberWithInt: kAudioFormatAppleLossless],  AVFormatIDKey,
                                        [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
                                        [NSNumber numberWithInt: AVAudioQualityMax], AVEncoderAudioQualityKey, nil];
-        NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
-                                                                NSUserDomainMask,   
-                                                                YES);
         //Deleting old track
-        NSString *docPathList = [pathList objectAtIndex:0];
+        NSLog(@"old name %@", self.trackNameButton.titleLabel.text);
         NSString *file = [self.trackNameButton.titleLabel.text stringByAppendingPathExtension:@"caf"];
-        NSString *oldSoundFilePath = [docPathList stringByAppendingPathComponent:file];
-        NSURL *oldURL = [[NSURL alloc] initFileURLWithPath:oldSoundFilePath];
+        NSURL *oldURL = [[NSURL alloc] initFileURLWithPath:[self pathForTracks:file]];
         AVAudioRecorder *oldRecorder = [[AVAudioRecorder alloc] initWithURL:oldURL
                                                                    settings:recordSettings 
                                                                       error:nil];
@@ -100,8 +120,7 @@
         NSString *fileDate = [dateString stringByAppendingPathExtension:@"caf"];
         [self.trackNameButton setTitle:dateString forState:0];
         
-        NSString *soundFilePath =[docPathList stringByAppendingPathComponent:fileDate];
-        NSURL *newURL = [[NSURL alloc] initFileURLWithPath:soundFilePath];
+        NSURL *newURL = [[NSURL alloc] initFileURLWithPath:[self pathForTracks:fileDate]];
         self.fileOfTrack = newURL;
         [newURL release];
         
@@ -123,10 +142,11 @@
         
         if (self.trackNameButton.titleLabel.text && self.groupNameButton.titleLabel.text) {
             ManagerSingleton *manager = [ManagerSingleton instance];
-            [manager renameTrack:self.nameOfTrackButton ToNewTrack:self.trackNameButton.titleLabel.text];
+            [manager renameTrack:self.nameOfTrackButton toNewTrack:self.trackNameButton.titleLabel.text];
             [manager saveData];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotificationRenameTrack object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotificationRenameTrack 
+                                                            object:nil];
     }
 
 }
@@ -139,8 +159,7 @@
     NSLog(@"fail");
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -148,13 +167,11 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     ManagerSingleton *manager = [ManagerSingleton instance];
     [self.trackNameButton setTitle:self.nameOfTrackButton forState:0];
-    [self.groupNameButton setTitle:[manager searchGroupThoseTrackBelongRo:self.nameOfTrackButton] forState:0];
+    [self.groupNameButton setTitle:[manager searchGroupThoseTrackBelongTo:self.nameOfTrackButton] forState:0];
     [super viewDidLoad];
-    
     recording = false;
 	// Do any additional setup after loading the view.
 }
@@ -179,7 +196,7 @@
     NSString *soundFilePath =[docPathList stringByAppendingPathComponent:oldNameOfTrack];
     NSURL *newURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
     self.fileOfTrack = newURL;
-       
+    
     NSString *newNameOfTrack = [name stringByAppendingPathExtension:@"caf"];
     NSString *soundNewFilePath =[docPathList stringByAppendingPathComponent:newNameOfTrack];
     newURL = [[NSURL alloc] initFileURLWithPath: soundNewFilePath];
@@ -191,7 +208,7 @@
     
     if (self.trackNameButton.titleLabel.text && self.groupNameButton.titleLabel.text) {
         ManagerSingleton *manager = [ManagerSingleton instance];
-        [manager renameTrack:self.nameOfTrackButton ToNewTrack:self.trackNameButton.titleLabel.text];
+        [manager renameTrack:self.nameOfTrackButton toNewTrack:self.trackNameButton.titleLabel.text];
         [manager saveData];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotificationRenameTrack object:nil];
@@ -201,7 +218,7 @@
     [self.groupNameButton setTitle:name forState:0];
     if (self.trackNameButton.titleLabel.text && self.groupNameButton.titleLabel.text) {
         ManagerSingleton *manager = [ManagerSingleton instance];
-        [manager removeTrack:self.trackNameButton.titleLabel.text AtNewGroup:self.groupNameButton.titleLabel.text];
+        [manager removeTrack:self.trackNameButton.titleLabel.text atNewGroup:self.groupNameButton.titleLabel.text];
         [manager saveData];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:keyForNotificationRenameTrack object:nil];
@@ -212,12 +229,12 @@
     [self setTrackNameButton:nil];
     [self setGroupNameButton:nil];
     [self setVoiceButton:nil];
+    [self setASlider:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -226,6 +243,7 @@
     [trackNameButton release];
     [groupNameButton release];
     [voiceButton release];
+    [aSlider release];
     [super dealloc];
 }
 @end
