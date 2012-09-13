@@ -20,7 +20,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.12579020260000001" green="0.048000468490000003" blue="0.51086956520000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.32284786920000003" green="0.040389558759999999" blue="0.66837211279999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -35,7 +35,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Record">
-                                    <color key="titleColor" red="0.12579020264838212" green="0.048000468491834689" blue="0.51086956521739135" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.32284786920000003" green="0.040389558759999999" blue="0.66837211279999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.75350711178990404" green="0.74713164251207742" blue="0.94558848505434778" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <state key="highlighted">
@@ -91,7 +91,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="add">
-                                    <color key="titleColor" red="0.6391495519" green="0.28319668370000001" blue="0.89003057070000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.32284786920000003" green="0.040389558759999999" blue="0.66837211279999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -167,7 +167,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Play">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.32284786923943504" green="0.040389558759564417" blue="0.66837211277173914" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -178,12 +178,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="W3Q-1s-Qji">
-                                <rect key="frame" x="92" y="209" width="136" height="37"/>
+                                <rect key="frame" x="92" y="244" width="136" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title=" Rerecord track">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.32284786920000003" green="0.040389558759999999" blue="0.66837211279999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -193,7 +192,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JRa-KS-suc">
-                                <rect key="frame" x="52" y="268" width="206" height="45"/>
+                                <rect key="frame" x="52" y="302" width="206" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -212,7 +211,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Stop">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.32284786920000003" green="0.040389558759999999" blue="0.66837211279999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -223,9 +222,17 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="Tlr-3V-OzW">
-                                <rect key="frame" x="50" y="152" width="210" height="23"/>
+                                <rect key="frame" x="60" y="152" width="190" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="10" id="wan-2u-kyS">
+                                <rect key="frame" x="112" y="191" width="87" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.66193957069999998" green="0.58077050029999999" blue="0.9469259511" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.60624031590000005" green="0.71474641859999999" blue="0.94558848510000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -233,6 +240,7 @@
                     <connections>
                         <outlet property="aSlider" destination="Tlr-3V-OzW" id="Ubu-Fk-oJf"/>
                         <outlet property="groupNameButton" destination="JRa-KS-suc" id="cOS-FQ-s9P"/>
+                        <outlet property="trackDuration" destination="wan-2u-kyS" id="HuT-5y-7jn"/>
                         <outlet property="trackNameButton" destination="fYI-HM-SSq" id="cez-5y-FTF"/>
                         <outlet property="voiceButton" destination="W3Q-1s-Qji" id="Z2u-qR-9cT"/>
                     </connections>
@@ -260,7 +268,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="rename">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.32284786920000003" green="0.040389558759999999" blue="0.66837211279999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -357,6 +365,7 @@
                 <relationship kind="action" name="recordOrStop:"/>
                 <relationship kind="outlet" name="aSlider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="groupNameButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="trackDuration" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="trackNameButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="voiceButton" candidateClass="UIButton"/>
             </relationships>
@@ -374,6 +383,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="3iw-Md-LNb"/>
+        <segue reference="WI6-9F-B19"/>
     </inferredMetricsTieBreakers>
 </document>

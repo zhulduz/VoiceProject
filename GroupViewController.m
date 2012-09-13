@@ -8,7 +8,6 @@
 
 #import "GroupViewController.h"
 #import "XTableController.h"
-#import "ManagerSingleton.h"
 
 @interface GroupViewController ()
 
@@ -25,8 +24,7 @@
 @synthesize xcontroller;
 @synthesize groupDelegate;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -34,11 +32,8 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    ManagerSingleton *manager = [ManagerSingleton instance];
-    XTableController *controller = [[XTableController alloc]
-                                 initWithArray:manager.arrayOfGroups];
+- (void)viewDidLoad {
+    XTableController *controller = [[XTableController alloc] initArray];
     self.xcontroller = controller;
     [controller release];
     
@@ -47,14 +42,12 @@
     [self.tableOfGroups setDataSource: self.xcontroller];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setTableOfGroups:nil];
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -65,7 +58,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    if ((self.groupDelegate != nil) && [self.groupDelegate respondsToSelector:@selector(setNewNameOnButton:)]) {
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        [self.groupDelegate performSelector:@selector(setNewNameOnButton:) withObject:cell.textLabel.text];
+        [self.groupDelegate performSelector:@selector(setNewNameOnButton:) 
+                                 withObject:cell.textLabel.text];
     }
 }
 

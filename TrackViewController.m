@@ -8,13 +8,11 @@
 
 #import "TrackViewController.h"
 #import "XTableController.h"
-#import "ManagerSingleton.h"
 #import "MainViewController.h"
 #import "TrackEditViewController.h"
 
 @interface TrackViewController ()
 
-@property (retain, nonatomic) NSMutableArray *arrayOfTracks;
 @property (retain, nonatomic) XTableController *xcontroller;
 @property (retain, nonatomic) IBOutlet UITableView *tableOfTracks;
 @property (retain, nonatomic) NSString *nameOfcell;
@@ -27,7 +25,6 @@ NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
 
 @synthesize xcontroller;
 @synthesize tableOfTracks;
-@synthesize arrayOfTracks;
 @synthesize nameOfcell;
 @synthesize groupName;
 
@@ -40,10 +37,8 @@ NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
 }
 
 - (void)viewDidLoad {
-    ManagerSingleton *manager = [ManagerSingleton instance];
-    self.arrayOfTracks = [manager getAllTracksOfTheGroup:self.groupName];
     XTableController *controller = [[XTableController alloc]
-                                    initWithArray:[manager getAllTracksOfTheGroup:self.groupName]];
+                                    initWithGroupName:self.groupName];
     self.xcontroller = controller;
     [controller release];
     
@@ -51,7 +46,6 @@ NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
     [self.tableOfTracks setDelegate: self];
     [self.tableOfTracks setDataSource: self.xcontroller];
     
-    //[self setTableOfTracks:nil];
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(reloadTableOfTrack:) 
@@ -59,7 +53,8 @@ NSString *const keyForNotificationRenameTrack = @"reloadTableOfTrack";
                                                object:nil];
 }
 
-- (void)reloadTableOfTrack:(NSNotification *)notification {    
+- (void)reloadTableOfTrack:(NSNotification *)notification {
+    [self.xcontroller reloadTracks];
     [self.tableOfTracks reloadData];  
 }
 

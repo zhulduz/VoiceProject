@@ -69,7 +69,6 @@ NSString *const keyForNotificationAddGroup = @"reloadTableOfGroup";
     
     //Instance for recordering mode
     recording = false;
-    
     self.tableOfGroups.separatorColor = [UIColor grayColor];
 }
 

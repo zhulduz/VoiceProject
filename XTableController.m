@@ -7,23 +7,35 @@
 //
 
 #import "XTableController.h"
+#import "ManagerSingleton.h"
 
 
 @interface XTableController ()
 
 @property (retain, nonatomic) NSArray *arrayOfData;
+@property (retain, nonatomic) NSString *group;
 
 @end
 
 @implementation XTableController {
     NSArray *arrayOfData_;
+    NSString *group_;
 }
 
 @synthesize arrayOfData = arrayOfData_;
+@synthesize group = group_;
 
-- (id)initWithArray:(NSMutableArray *)groups {
+- (id)initWithGroupName:(NSString *)nameOfGroup {
     if ((self = [super init])) {
-            self.arrayOfData = groups;
+        self.group = nameOfGroup;
+        [self reloadTracks];
+    }
+    return self;
+}
+
+- (id)initArray {
+    if ((self = [super init])) {
+        self.arrayOfData = [ManagerSingleton instance].arrayOfGroups;
     }
     return self;
 }
@@ -57,8 +69,14 @@
     return cell;
 }
 
+- (void)reloadTracks {
+    ManagerSingleton *manager = [ManagerSingleton instance];
+    self.arrayOfData = [manager getAllTracksOfTheGroup:self.group];
+}
+
 -(void)dealloc {
     [arrayOfData_ release];
+    [group_ release];
     [super dealloc];
 }
 
